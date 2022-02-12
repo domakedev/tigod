@@ -1,0 +1,25 @@
+.footer {
+  @apply bg-bc-footer
+  p-4
+  flex
+  flex-col md:flex-row
+  items-center md:justify-between
+  text-sm
+  font-normal
+    /**/;
+}
+
+.footer-tigod {
+  @apply order-3 
+  md:order-2;
+}
+
+.footer-creator {
+  @apply order-2
+  md:order-3
+  flex
+  flex-col md:flex-row md:gap-2
+  items-center
+  mb-2 md:mb-0
+  text-center;
+}
