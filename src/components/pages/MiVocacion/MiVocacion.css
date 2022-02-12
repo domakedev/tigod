@@ -5,16 +5,41 @@
   items-center;
 }
 
-.careers-title {
+.mivocacion-careers {
+  @apply mx-5
+  max-w-5xl;
+}
+
+.mivocacion-professionals {
+  @apply mx-5
+  max-w-5xl;
+}
+
+.careers-title,
+.professionals-title {
   @apply font-normal
+  px-2
     text-sm
     mt-20
     mb-4
     max-w-[230px];
 }
 
+.professionals-title {
+  @apply max-w-[272px];
+}
+
 .careers-cards {
   @apply flex
     flex-wrap
-    justify-center;
+    justify-center
+    gap-14;
+}
+
+.professionals-cards {
+  @apply min-w-[320px]
+  flex
+    flex-wrap
+    justify-center
+    gap-20;
 }

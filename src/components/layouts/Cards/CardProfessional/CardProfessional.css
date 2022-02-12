@@ -1,0 +1,59 @@
+.card-professional {
+  @apply w-60 
+  bg-white
+  shadow-md
+  relative;
+}
+
+.profesional-image {
+  @apply object-cover
+    object-center h-36 w-60;
+}
+
+.profesional-texts {
+  @apply mt-5
+  px-3
+    py-5
+    flex
+    flex-col
+    items-start
+    justify-center;
+}
+
+.profesional-name {
+  @apply absolute
+  -top-7 bottom-0 
+  left-0 right-0
+  m-auto
+  max-h-fit
+  max-w-fit
+  py-3
+    px-5
+    bg-font-color
+    text-white
+    text-sm
+    font-normal;
+}
+
+.profesional-profession,
+.profesional-place {
+  @apply font-normal
+    text-sm
+    flex
+    justify-center
+    gap-2
+    items-center
+    mt-1;
+}
+
+.professional-buttons {
+  @apply flex
+    justify-center
+    gap-20
+    w-full
+    mt-6;
+}
+.professional-button {
+  @apply w-10
+    h-10;
+}
