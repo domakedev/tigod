@@ -10,7 +10,8 @@
   .page-container {
     @apply flex
     flex-col
-    min-h-screen;
+    min-h-screen
+    items-center;
   }
 
   .main-content {

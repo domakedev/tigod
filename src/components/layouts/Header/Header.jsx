@@ -15,10 +15,10 @@ const Header = () => {
       </Link>
       <div className="header_buttons">
         <Menu right isOpen={false}>
-          <Link className="menu-item" to="/login">
+          <Link className="menu-item " to="/login">
             Login
           </Link>
-          <Link className="menu-item" to="/register">
+          <Link className="menu-item " to="/register">
             Register
           </Link>
         </Menu>
@@ -28,6 +28,7 @@ const Header = () => {
           fun={() => {
             navigate("/login");
           }}
+          hidden
         />
         <Button
           text="Registrarme"
@@ -35,6 +36,7 @@ const Header = () => {
           fun={() => {
             navigate("/register");
           }}
+          hidden
         />
       </div>
     </div>

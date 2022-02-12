@@ -2,6 +2,7 @@
   @apply bg-bc-footer
   p-4
   flex
+  w-full
   flex-col md:flex-row
   items-center md:justify-between
   text-sm

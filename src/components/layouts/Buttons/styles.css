@@ -1,6 +1,6 @@
 .btn {
   @apply text-white 
-  hidden
+  
   sm:block
     font-normal
     py-2 

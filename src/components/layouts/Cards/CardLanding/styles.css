@@ -1,0 +1,30 @@
+.card-landing {
+  @apply w-80
+      flex
+      flex-col
+      items-center
+      py-16
+      px-4
+      m-2
+      shadow-xl
+      bg-white;
+}
+
+.card-image-container {
+  @apply h-[360px]
+  flex
+  justify-center
+  items-end
+  mb-10;
+}
+
+.card-image {
+  @apply drop-shadow-xl;
+}
+
+.card-description {
+  @apply text-2xl
+      font-medium
+      text-center
+      mb-4;
+}
