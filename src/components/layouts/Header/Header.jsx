@@ -2,9 +2,9 @@ import React from "react";
 import Button from "../Buttons/Button";
 import { useNavigate } from "react-router";
 import Logo from "../../../assets/Logotipo.png";
-import "./styles.css";
 import { Link } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
+import "./styles.css";
 
 const Header = () => {
   const navigate = useNavigate();
