@@ -1,5 +1,5 @@
 import "./App.css";
-import Button from "./components/layouts/Buttons/Button.jsx";
+// import Button from "./components/layouts/Buttons/Button.jsx";
 import Header from "./components/layouts/Header/Header.jsx";
 import Footer from "./components/layouts/Footer/Footer.jsx";
 
