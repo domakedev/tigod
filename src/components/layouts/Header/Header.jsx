@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import Logo from "../../../assets/Logotipo.png";
 import { Link } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
-import "./styles.css";
+import "./Header.css";
 
 const Header = () => {
   const navigate = useNavigate();

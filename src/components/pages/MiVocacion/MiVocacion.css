@@ -1,3 +1,20 @@
 .main-content__mivocacion {
-  @apply my-5;
+  @apply my-5
+  flex
+  flex-col
+  items-center;
+}
+
+.careers-title {
+  @apply font-normal
+    text-sm
+    mt-20
+    mb-4
+    max-w-[230px];
+}
+
+.careers-cards {
+  @apply flex
+    flex-wrap
+    justify-center;
 }

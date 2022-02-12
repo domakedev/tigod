@@ -1,0 +1,39 @@
+.career-card {
+  @apply w-[300px]
+    bg-white
+    flex    
+    justify-between
+    shadow-md;
+}
+
+.career-card-image {
+  @apply w-1/3
+    h-64
+    object-cover
+    object-center;
+}
+
+.career-card-texts {
+  @apply flex
+    flex-col
+    justify-center
+    items-center
+    p-3;
+}
+
+.career-card-title {
+  @apply text-base
+  font-semibold
+  mb-5
+  mt-4;
+}
+
+.career-card-description {
+  @apply font-normal
+    text-sm
+    mb-5;
+}
+
+.career-card-emoji {
+  @apply mb-6;
+}
