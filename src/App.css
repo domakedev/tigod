@@ -1,9 +1,10 @@
-.main-content {
+.main-content-landing {
   @apply max-w-5xl
   /* min-w-[1024px] */
    
     flex
     justify-center
     flex-wrap
-    my-5;
+    my-5
+    flex-grow;
 }

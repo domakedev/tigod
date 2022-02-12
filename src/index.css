@@ -5,7 +5,8 @@
 @layer components {
   body {
     @apply bg-bc-deep
-    font-poppins;
+    font-poppins
+    text-font-color;
   }
   .page-container {
     @apply flex

@@ -14,19 +14,19 @@ function App() {
   return (
     <div className="page-container">
       <Header />
-      <div className="main-content">
+      <div className="main-content-landing">
         <CardLanding
           image={Professional}
           description="Genera ingresos con tu experiencia"
           buttonText="Muestrame"
-          fun={() => {
-            navigate("/register");
-          }}
         />
         <CardLanding
           image={Thinking}
           description="Descubre tu vocacion y conocela de cerca"
           buttonText="Empecemos"
+          fun={() => {
+            navigate("/test");
+          }}
         />
         <CardLanding
           image={Parents}
