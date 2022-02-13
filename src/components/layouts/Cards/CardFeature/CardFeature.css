@@ -1,0 +1,26 @@
+.feature-card {
+  @apply w-[210px]
+      shadow-md
+      py-[18px]
+      px-[4px]
+      flex
+      flex-col
+      gap-[17px]
+      items-center
+      bg-white
+      rounded-[3px];
+}
+.feature-title {
+  @apply font-bold;
+}
+.feature-image {
+  @apply w-[95px]
+    h-[95px]
+    object-center
+    object-cover
+    rounded-full;
+}
+.feature-description {
+  @apply px-2
+    text-center;
+}

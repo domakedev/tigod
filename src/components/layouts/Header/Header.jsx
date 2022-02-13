@@ -2,12 +2,14 @@ import React from "react";
 import Button from "../Buttons/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 import Logo from "../../../assets/Logotipo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
 import "./Header.css";
 
 const Header = () => {
+  const navigate = useNavigate();
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+
   console.log(
     "🚀 ~ file: Header.jsx ~ line 13 ~ isAuthenticated",
     isAuthenticated
@@ -22,15 +24,28 @@ const Header = () => {
       <div className="header_buttons">
         <Menu right isOpen={false}>
           {isAuthenticated ? (
-            <Link
-              className="menu-item "
-              to=""
-              onClick={() => {
-                logout({ returnTo: window.location.origin });
-              }}
-            >
-              Cerrar Sesión
-            </Link>
+            <>
+              <Link
+                className="menu-item "
+                to=""
+                onClick={() => {
+                  logout({ returnTo: window.location.origin });
+                }}
+              >
+                Cerrar Sesión
+              </Link>
+              <br />
+              <Link
+                className="menu-item "
+                to={`/miperfil/estudiante/${user?.email}`}
+              >
+                Mi Perfil
+              </Link>
+              <br />
+              <Link className="menu-item " to="" onClick={() => {}}>
+                Configurar Mi Perfil
+              </Link>
+            </>
           ) : (
             <>
               <Link
@@ -57,21 +72,37 @@ const Header = () => {
         </Menu>
         <div></div>
         {isAuthenticated ? (
-          <Button
-            text="Cerrar Sesion"
-            type="alert"
-            fun={() => {
-              logout({ returnTo: window.location.origin });
-            }}
-            hidden
-          />
+          <>
+            <Button
+              text="Cerrar Sesion"
+              type="alert"
+              fun={() => {
+                logout({ returnTo: window.location.origin });
+              }}
+              hidden
+            />
+            <Button
+              text="Mi Perfil"
+              type="principal"
+              fun={() => {
+                navigate(`/miperfil/estudiante/${user?.email}`);
+              }}
+              hidden
+            />
+            <Button
+              text="Configurar Mi Perfil"
+              type="config"
+              fun={() => {}}
+              hidden
+            />
+          </>
         ) : (
           <>
             <Button
               text="Iniciar Sesión"
               type="secondary"
               fun={() => {
-                loginWithRedirect();
+                loginWithRedirect({ returnTo: window.location.origin });
               }}
               hidden
             />

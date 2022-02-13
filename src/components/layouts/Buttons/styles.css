@@ -28,3 +28,13 @@
   @apply bg-alert
   text-white;
 }
+
+.btn-config {
+  @apply bg-bc-bar
+  text-white;
+}
+
+.btn-warning {
+  @apply bg-warning
+  text-white;
+}
