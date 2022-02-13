@@ -38,3 +38,8 @@
   @apply bg-warning
   text-white;
 }
+
+.btn-success {
+  @apply bg-success
+  text-white;
+}

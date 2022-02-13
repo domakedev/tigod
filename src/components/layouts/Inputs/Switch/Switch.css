@@ -1,0 +1,83 @@
+.sw_dark_mode_label {
+  margin: 0 auto;
+  display: block;
+  width: 50px;
+  height: 26px;
+  background-color: #353535; /* Color fondo no checked*/
+  border-radius: 50px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.sw_dark_mode_label::before {
+  content: "";
+  display: block;
+  height: 16px;
+  width: 16px;
+  background-color: #f46a6a;
+  border-radius: 50%;
+  -webkit-transition: 1s;
+  transition: 1s;
+  will-change: tranform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.sw_dark_mode_input {
+  display: none;
+}
+
+.sw_dark_mode_input:checked ~ .sw_dark_mode_label::before {
+  /* background-image: url("../assets/iconmoon2.PNG"); */
+  background-color: #34c38f;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+/* Switch cuando esta checked */
+.sw_dark_mode_input:checked ~ .sw_dark_mode_label {
+  background-color: #353535; /* Color fondo no checked*/
+}
+
+.sw_dark_mode_label {
+  position: relative;
+}
+
+.sw_dark_mode_label .textito_light {
+  position: absolute;
+  top: 4px;
+  left: -80px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #1e323d;
+  font-size: 1.5rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sw_dark_mode_label .textito_dark {
+  position: absolute;
+  top: 4px;
+  right: -80px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #ddd;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+
+.input-switch {
+  @apply m-2;
+}

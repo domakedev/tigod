@@ -1,0 +1,54 @@
+.config-main-content {
+  @apply p-5
+  flex
+  flex-wrap
+  items-start
+  gap-[28px]
+  justify-center
+  max-w-[700px];
+}
+
+.config-card {
+  @apply p-[20px]
+  bg-white
+  shadow-sm
+  w-[286px]
+  pb-[35px];
+}
+
+.config-card input[type="text"] {
+  @apply border-[1px]
+  border-bc-near
+  rounded-sm
+  p-2
+  text-sm
+  mt-2
+  w-full;
+}
+
+.config-card-title {
+  @apply font-semibold
+  text-sm;
+}
+
+.choose-one-option-config-photo {
+  @apply flex
+  justify-around
+  mt-5;
+}
+.choose-one-option-config-photo img {
+  @apply w-[72px]
+    h-[72px]
+    object-cover
+    object-center
+    rounded-full;
+}
+.config-card-title_universities {
+  @apply mb-3;
+}
+
+.config-card_universities {
+  @apply flex
+    justify-start
+    gap-3;
+}
