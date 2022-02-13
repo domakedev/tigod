@@ -11,6 +11,7 @@ import TestPage from "./components/pages/TestPage/TestPage";
 import NotFound from "./components/pages/P404/P404.jsx";
 import MiVocacion from "./components/pages/MiVocacion/MiVocacion.jsx";
 import ProfileStudent from "./components/pages/ProfileStudent/ProfileStudent.jsx";
+import ProfileStudentConfig from "./components/pages/ProfileStudentConfig/ProfileStudentConfig";
 
 render(
   <Auth0Provider
@@ -26,6 +27,10 @@ render(
         <Route
           path="/miperfil/estudiante/:email"
           element={<ProfileStudent />}
+        />
+        <Route
+          path="/miperfil/estudiante/config"
+          element={<ProfileStudentConfig />}
         />
 
         <Route path="*" element={<NotFound />} />

@@ -1,6 +1,7 @@
 /* Profile Student Container*/
 .profile-student-container {
-  @apply md:flex 
+  @apply px-5
+  md:flex 
   md:items-start
   gap-10;
 }

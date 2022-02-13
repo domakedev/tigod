@@ -42,7 +42,7 @@ const Header = () => {
                 Mi Perfil
               </Link>
               <br />
-              <Link className="menu-item " to="" onClick={() => {}}>
+              <Link className="menu-item " to={`/miperfil/estudiante/config`}>
                 Configurar Mi Perfil
               </Link>
             </>
@@ -92,7 +92,9 @@ const Header = () => {
             <Button
               text="Configurar Mi Perfil"
               type="config"
-              fun={() => {}}
+              fun={() => {
+                navigate(`/miperfil/estudiante/config`);
+              }}
               hidden
             />
           </>
