@@ -14,8 +14,8 @@ import ProfileStudent from "./components/pages/ProfileStudent/ProfileStudent.jsx
 
 render(
   <Auth0Provider
-    domain={process.env.REACT_APP_DOMAIN}
-    clientId={process.env.REACT_APP_CLIENTID}
+    domain={`${process.env.REACT_APP_DOMAIN}`}
+    clientId={`${process.env.REACT_APP_CLIENTID}`}
     redirectUri={window.location.origin}
   >
     <BrowserRouter>
