@@ -1,0 +1,88 @@
+.home-icon {
+  @apply self-end
+  m-3;
+}
+
+.register-card {
+  @apply w-4/5
+  max-w-[475px]
+  min-w-[286px]
+    bg-white
+    shadow-md
+    mx-auto
+    my-10
+    rounded-[3px];
+}
+
+.register-card-header {
+  @apply h-[125px]
+  bg-bc-near
+  p-3
+  relative;
+}
+.register-card-header-title {
+  @apply font-semibold
+  text-principal
+  mb-3;
+}
+.register-card-header-description {
+  @apply text-sm
+    font-normal
+    text-principal
+    w-2/3;
+}
+.register-card-header-img {
+  @apply absolute
+  bottom-0
+  right-2;
+}
+
+/*Body*/
+
+.register-card-body {
+  @apply pt-[50px] pb-[14px]
+  px-[34px];
+}
+.register-body-inputs {
+  @apply flex
+    flex-col
+    items-center;
+}
+
+.register-label {
+  @apply font-medium text-sm;
+}
+.register-input {
+  @apply border-[1px]
+  border-bc-near
+  rounded-[3px]
+  py-[9px]
+  px-[12px]
+  w-full
+  font-normal
+  text-sm
+  mb-3 mt-[5px];
+}
+.register-login-section {
+  @apply text-[13px];
+}
+
+.register-login-section a {
+  @apply text-active
+  font-semibold;
+}
+
+.register-terms {
+  @apply mt-[40px]
+  flex
+  justify-center
+  flex-col
+  items-center;
+}
+.register-terms-text {
+  @apply text-sm text-center;
+}
+.register-terms-text a {
+  @apply text-sm text-center text-active
+  font-semibold;
+}
