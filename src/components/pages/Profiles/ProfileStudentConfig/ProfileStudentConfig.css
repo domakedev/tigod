@@ -8,29 +8,6 @@
   max-w-[700px];
 }
 
-.config-card {
-  @apply p-[20px]
-  bg-white
-  shadow-sm
-  w-[286px]
-  pb-[35px];
-}
-
-.config-card input[type="text"] {
-  @apply border-[1px]
-  border-bc-near
-  rounded-sm
-  p-2
-  text-sm
-  mt-2
-  w-full;
-}
-
-.config-card-title {
-  @apply font-semibold
-  text-sm;
-}
-
 .choose-one-option-config-photo {
   @apply flex
   justify-around

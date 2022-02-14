@@ -18,4 +18,31 @@
   .main-content {
     @apply flex-grow;
   }
+
+  /* Config Card*/
+
+  .config-card {
+    @apply p-[20px]
+    bg-white
+    shadow-sm
+    w-[286px]
+    pb-[35px]
+    /* md:m-5; */;
+  }
+  .config-card input[type="text"] {
+    @apply border-[1px]
+    border-bc-near
+    rounded-sm
+    p-3
+    py-3
+    text-sm
+    /* mt-2 */
+    w-full;
+  }
+
+  .config-card-title {
+    @apply font-semibold
+    text-sm
+    mb-5;
+  }
 }

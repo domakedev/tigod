@@ -13,6 +13,7 @@ import MiVocacion from "./components/pages/MiVocacion/MiVocacion.jsx";
 import ProfileStudent from "./components/pages/Profiles/ProfileStudent/ProfileStudent.jsx";
 import ProfileStudentConfig from "./components/pages/Profiles/ProfileStudentConfig/ProfileStudentConfig";
 import ProfileProfessional from "./components/pages/Profiles/ProfileProfessional/ProfileProfessional";
+import ProfileProfessionalConfig from "./components/pages/Profiles/ProfileProfessionalConfig/ProfileProfessionalConfig";
 
 render(
   <Auth0Provider
@@ -36,6 +37,10 @@ render(
         <Route
           path="/miperfil/profesional/:email"
           element={<ProfileProfessional />}
+        />
+        <Route
+          path="/miperfil/profesional/config"
+          element={<ProfileProfessionalConfig />}
         />
 
         <Route path="*" element={<NotFound />} />

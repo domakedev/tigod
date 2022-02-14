@@ -1,0 +1,43 @@
+.config-professional-main-content {
+  @apply m-5
+  flex
+  flex-col
+  gap-5
+    flex-wrap
+    items-center
+    /* md:flex-row
+    md:flex-wrap
+    md:justify-center
+    md:items-start; */;
+}
+.config-card-label {
+  @apply text-sm
+    font-semibold
+    mt-5
+    block;
+}
+
+.exp-inicio {
+  @apply w-full inline-block
+  border-[1px]
+  border-bc-near
+  rounded-sm
+  p-3
+  py-3
+  text-sm
+  mr-5;
+}
+.exp-fin {
+  @apply w-full inline-block
+  border-[1px]
+  border-bc-near
+  rounded-sm
+  p-3
+  py-3
+  text-sm;
+}
+
+label[for="tInicial"],
+label[for="tFinal"] {
+  @apply text-sm;
+}
