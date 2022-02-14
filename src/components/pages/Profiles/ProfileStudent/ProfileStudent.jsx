@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import "./ProfileStudent.css";
 
 // Components
-import Header from "../../layouts/Header/Header";
-import Footer from "../../layouts/Footer/Footer";
-import CardFeature from "../../layouts/Cards/CardFeature/CardFeature";
+import Header from "../../../layouts/Header/Header";
+import Footer from "../../../layouts/Footer/Footer";
+import CardFeature from "../../../layouts/Cards/CardFeature/CardFeature";
 
 // Images
-import RegisterHeader from "../../../assets/RegisterHeader.svg";
-import VoidImage from "../../../assets/void.png";
+import RegisterHeader from "../../../../assets/RegisterHeader.svg";
+import VoidImage from "../../../../assets/void.png";
 
 const ProfileStudent = () => {
   const userVisited = {

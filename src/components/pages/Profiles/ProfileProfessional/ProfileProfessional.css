@@ -1,0 +1,184 @@
+.main-content_profile-professional {
+  @apply m-10;
+}
+
+/* Profile Card*/
+.profile-card {
+  @apply min-w-[286px]
+      max-h-fit
+        bg-white
+        shadow-md
+        mx-auto
+        mb-10
+        rounded-[3px];
+}
+.profile-card-header {
+  @apply h-[125px]
+      bg-bc-near
+      p-3
+      relative;
+}
+.profile-card-header-title {
+  @apply font-semibold
+      text-principal
+      mb-3;
+}
+.profile-card-header-description {
+  @apply text-sm
+        font-normal
+        text-principal
+        w-2/3;
+}
+.profile-card-header-img {
+  @apply absolute
+      bottom-0
+      right-2;
+}
+
+.profile-card-body {
+  @apply pt-[50px] pb-[14px]
+      px-[34px]
+      relative;
+}
+
+.profile-card-body-image {
+  @apply absolute
+  -top-7;
+}
+.profile-card-body-nt {
+  @apply absolute
+  right-5
+  top-5  
+  flex
+  gap-2;
+}
+.profile-card-body-nt img {
+  @apply w-[30px]
+  h-[30px]
+  object-center
+  object-cover;
+}
+.profile-card-body-image img {
+  @apply w-[72px]
+      h-[72px]
+      object-center
+      object-cover
+      rounded-full
+      absolute;
+}
+.profile-status {
+  @apply w-[20px]
+      h-[20px]
+      rounded-full
+      absolute
+      right-0
+      bottom-0
+      bg-success;
+}
+
+.profile-card-body-block-text {
+  @apply my-5;
+}
+.profile-card-body-block-text p {
+  @apply uppercase
+    font-semibold;
+}
+.profile-card-body-block-text span {
+  @apply font-normal;
+}
+
+.profile-card-mini {
+  @apply shadow-md
+  w-[286px]
+  bg-white
+  py-[20px]
+  px-[16px]
+  flex
+  justify-between
+  items-center;
+}
+.profile-card-mini-title {
+  @apply font-semibold
+  text-sm;
+}
+
+.profile-card-mini-description {
+  @apply font-normal
+  text-sm
+  pl-3
+  mt-1;
+}
+.profile-card-mini-image {
+  @apply w-[40px]
+    h-[40px]
+    object-cover
+    object-center;
+}
+
+.profile-card-experience {
+  @apply shadow-md
+    w-[286px]
+    bg-white
+    py-[20px]
+    px-[16px]
+    /* flex
+    justify-start */
+    my-10;
+}
+.profile-card-experience-title {
+  @apply font-semibold
+    text-sm
+    mb-3;
+}
+.profile-card-experiences {
+  @apply w-4/5
+  border-l-4
+  border-dashed
+  border-active;
+}
+
+.professional-experience {
+  @apply flex
+  items-start
+  gap-3
+  my-[23px];
+}
+.professional-experience-icon {
+  @apply w-[20px]
+    h-[20px]
+    ml-2
+    mt-1;
+}
+.experience-texts-occupation {
+  @apply text-lg font-semibold;
+}
+.experience-texts-company {
+  @apply text-base;
+}
+.experience-texts-times {
+  @apply font-light
+    text-active;
+}
+.experience-texts-times {
+  @apply flex
+    gap-2;
+}
+
+/* Profile Map*/
+.profile-card-map {
+  @apply shadow-md
+    w-[286px]
+    bg-white
+    py-[20px]
+    px-[16px]
+    /* flex
+    justify-start */
+    my-10
+    lg:w-[600px];
+}
+
+.profile-card-map-title {
+  @apply font-semibold
+    text-sm
+    mb-3;
+}

@@ -2,13 +2,13 @@ import React from "react";
 import "./ProfileStudentConfig.css";
 
 // Components
-import Header from "../../layouts/Header/Header";
-import Footer from "../../layouts/Footer/Footer";
-import Switch from "../../layouts/Inputs/Switch/Switch";
-import Button from "../../layouts/Buttons/Button";
+import Header from "../../../layouts/Header/Header";
+import Footer from "../../../layouts/Footer/Footer";
+import Switch from "../../../layouts/Inputs/Switch/Switch";
+import Button from "../../../layouts/Buttons/Button";
 
 // Images
-import VoidImage from "../../../assets/void.png";
+import VoidImage from "../../../../assets/void.png";
 
 const ProfileStudentConfig = () => {
   return (

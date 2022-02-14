@@ -10,8 +10,9 @@ import TestPage from "./components/pages/TestPage/TestPage";
 // import Register from "./components/pages/Register/Register.jsx";
 import NotFound from "./components/pages/P404/P404.jsx";
 import MiVocacion from "./components/pages/MiVocacion/MiVocacion.jsx";
-import ProfileStudent from "./components/pages/ProfileStudent/ProfileStudent.jsx";
-import ProfileStudentConfig from "./components/pages/ProfileStudentConfig/ProfileStudentConfig";
+import ProfileStudent from "./components/pages/Profiles/ProfileStudent/ProfileStudent.jsx";
+import ProfileStudentConfig from "./components/pages/Profiles/ProfileStudentConfig/ProfileStudentConfig";
+import ProfileProfessional from "./components/pages/Profiles/ProfileProfessional/ProfileProfessional";
 
 render(
   <Auth0Provider
@@ -31,6 +32,10 @@ render(
         <Route
           path="/miperfil/estudiante/config"
           element={<ProfileStudentConfig />}
+        />
+        <Route
+          path="/miperfil/profesional/:email"
+          element={<ProfileProfessional />}
         />
 
         <Route path="*" element={<NotFound />} />
