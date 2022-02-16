@@ -12,7 +12,6 @@ import {
 
 // Icon
 import { visitIconLocation, proIconLocation } from "./IconLocation";
-import StudentIcon from "../../../../assets/icons/student.png";
 
 const fakeProWorkPlaces = [
   ["-7.161630582718947", "-78.51263637785485"], // Cax
