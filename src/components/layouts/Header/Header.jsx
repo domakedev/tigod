@@ -52,12 +52,15 @@ const Header = () => {
               <br />
               <Link
                 className="menu-item "
-                to={`/miperfil/estudiante/${user?.email}`}
+                to={`/miperfil/${data?.obtenerUsuario?.role}/${user?.email}`}
               >
                 Mi Perfil
               </Link>
               <br />
-              <Link className="menu-item " to={`/miperfil/estudiante/config`}>
+              <Link
+                className="menu-item "
+                to={`/miperfil/${data?.obtenerUsuario?.role}/config`}
+              >
                 Configurar Mi Perfil
               </Link>
             </>

@@ -172,22 +172,3 @@
   @apply flex
     gap-2;
 }
-
-/* Profile Map*/
-.profile-card-map {
-  @apply shadow-md
-    w-[286px]
-    bg-white
-    py-[20px]
-    px-[16px]
-    /* flex
-    justify-start */
-    my-10
-    lg:w-[600px];
-}
-
-.profile-card-map-title {
-  @apply font-semibold
-    text-sm
-    mb-3;
-}

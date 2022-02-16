@@ -1,0 +1,34 @@
+/* Profile Map*/
+.profile-card-map {
+  @apply shadow-md
+      w-[286px]
+      h-[286px]
+      bg-white
+      py-[20px]
+      px-[16px]
+      /* flex
+      justify-start */
+      my-10
+      lg:w-[600px]
+      lg:h-[600px];
+}
+
+.profile-card-map-title {
+  @apply font-semibold
+      text-sm
+      mb-3;
+}
+
+.leaflet-container {
+  @apply w-full
+      h-[220px]
+      
+      lg:w-full
+      lg:h-[530px];
+}
+
+.leaflet-marker-icon {
+  @apply bg-white
+  rounded-full
+  p-1;
+}

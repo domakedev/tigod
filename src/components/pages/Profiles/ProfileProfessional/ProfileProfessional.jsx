@@ -13,6 +13,7 @@ import Footer from "../../../layouts/Footer/Footer";
 
 // Apollo
 import { useQuery, gql } from "@apollo/client";
+import CardMap from "../../../layouts/Cards/CardMap/CardMap";
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
@@ -143,9 +144,7 @@ const ProfileProfessional = () => {
           </div>
         </div>
 
-        <div className="profile-card-map">
-          <p className="profile-card-map-title">Donde ha trabajado</p>
-        </div>
+        <CardMap />
       </div>
       <Footer />
     </div>
