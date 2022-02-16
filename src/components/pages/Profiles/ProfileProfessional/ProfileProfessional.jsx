@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import "./ProfileProfessional.css";
 
 // Images
@@ -10,7 +11,42 @@ import ChatIcon from "../../../../assets/icons/chat.svg";
 import Header from "../../../layouts/Header/Header";
 import Footer from "../../../layouts/Footer/Footer";
 
+// Apollo
+import { useQuery, gql } from "@apollo/client";
+const OBTENER_USUARIO = gql`
+  query obtenerUsuario($email: String!) {
+    obtenerUsuario(email: $email) {
+      id
+      name
+      role
+      photo
+      isOnline
+    }
+  }
+`;
+
 const ProfileProfessional = () => {
+  const params = useParams();
+
+  const email = params.email;
+  const { loading, error, data } = useQuery(OBTENER_USUARIO, {
+    variables: {
+      email,
+    },
+    skip: !email.includes("@"),
+  });
+
+  console.log(
+    "🚀 ~ file: ProfileStudent.jsx ~ line 32 ~ loading, error, data",
+    loading,
+    error,
+    data?.obtenerUsuario
+  );
+
+  const realUser = data?.obtenerUsuario;
+
+  console.log("🚀 ~ file: ProfileProfessional.jsx ~ line 16 ~ params", params);
+
   const userVisited = {
     image: VoidImage,
     name: "Nombre",
@@ -27,10 +63,10 @@ const ProfileProfessional = () => {
         <div className="profile-card">
           <div className="profile-card-header">
             <p className="profile-card-header-title">
-              ¡Bienvenido al perfil de María!
+              ¡Bienvenido al perfil de {realUser?.name}!
             </p>
             <p className="profile-card-header-description">
-              Esta es su informacion pública
+              Esta es su información pública
             </p>
             <img
               className="profile-card-header-img"
@@ -40,16 +76,23 @@ const ProfileProfessional = () => {
           </div>
           <div className="profile-card-body">
             <div className="profile-card-body-image">
-              <img src={userVisited?.image} alt="" />
-              <div className="profile-status"></div>
+              <img src={realUser?.photo} alt="" />
+
+              <div
+                className={
+                  realUser?.isOnline
+                    ? "profile-status_on"
+                    : "profile-status_off"
+                }
+              ></div>
             </div>
             <div className="profile-card-body-nt">
               <img src={userVisited?.image} alt="" />
               <img src={userVisited?.image} alt="" />
             </div>
             <div className="profile-card-body-block-text">
-              <p>{userVisited?.name}</p>
-              <span>{userVisited?.profession}</span>
+              <p>{realUser?.name}</p>
+              <span>{realUser?.role}</span>
             </div>
             <div className="profile-card-body-block-text">
               <p>{userVisited?.actualWorkPlace}</p>

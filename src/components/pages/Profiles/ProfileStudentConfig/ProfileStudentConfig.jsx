@@ -58,10 +58,6 @@ const ProfileStudentConfig = () => {
   useEffect(() => {
     // const datita = data?.obtenerUsuario;
     if (data?.obtenerUsuario?.email) {
-      // setConfigUser({
-      //   ...configUser,
-      //   name,
-      // });
       setConfigUser(data.obtenerUsuario);
     }
   }, [data]);
