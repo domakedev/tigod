@@ -1,17 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Register.css";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
+// Apollo
+import { gql, useMutation } from "@apollo/client";
 
 // Components
 import Footer from "../../layouts/Footer/Footer";
 import Button from "../../layouts/Buttons/Button";
+// import CardRegister from "../../layouts/Cards/CardRegister/CardRegister";
 
 // Icons & Images
-import RegisterHeader from "../../../assets/RegisterHeader.svg";
 import HomeIcon from "../../../assets/icons/home.svg";
-import ListChecked from "../../../assets/icons/listChecked.svg";
+
+import "./Register.css";
+
+const ACTUALIZAR_USUARIO = gql`
+  mutation actualizarUsuario($email: String, $input: UsuarioInput) {
+    actualizarUsuario(email: $email, input: $input) {
+      name
+      email
+      role
+    }
+  }
+`;
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [role, setRole] = useState("Estudiante");
+  const { user } = useAuth0();
+  console.log("🚀 ~ file: Register.jsx ~ line 31 ~ user", user);
+  const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
+
+  const updateUser = async () => {
+    console.log("adasd");
+    try {
+      const { data } = await actualizarUsuario({
+        variables: {
+          email: user?.email,
+          input: {
+            role: role,
+          },
+        },
+      });
+      if (role === "Estudiante") {
+        navigate("/test");
+      }
+      if (role === "Profesional") {
+        navigate(`/miperfil/profesional/${user?.email}`);
+      }
+      console.log("🚀 ~ file: Register.jsx ~ line 37 ~ data", data);
+    } catch (error) {
+      console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);
+    }
+  };
+
+  if (user === undefined) {
+    return "cargando... pue";
+  }
+
   return (
     <div className="page-container">
       <Link className="home-icon" to="/">
@@ -19,70 +66,35 @@ const Register = () => {
       </Link>
 
       <div className="main-content">
-        <div className="register-card">
-          <div className="register-card-header">
-            <p className="register-card-header-title">Registro Gratuito</p>
-            <p className="register-card-header-description">
-              {" "}
-              Usa las mejores herramientas para descubrir tu vocación
-            </p>
-            <img
-              className="register-card-header-img"
-              src={RegisterHeader}
-              alt=""
+        {/* <CardRegister /> */}
+        <h2 className="register-role-title">
+          Para finalizar, selecciona tu tipo de usuario:
+        </h2>
+        <div className="register-select-role">
+          <label htmlFor="selectrole1">
+            <input
+              type="radio"
+              id="selectrole1"
+              name="role"
+              value="Estudiante"
+              checked={role === "Estudiante"}
+              onChange={(e) => setRole(e.target.value)}
             />
-          </div>
-          <div className="register-card-body">
-            <form className="register-body-inputs">
-              <label className="register-label" htmlFor="email">
-                {" "}
-                Correo electrónico
-                <input
-                  className="register-input"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Ingresa tu email"
-                />
-              </label>
-              <label className="register-label" htmlFor="email">
-                {" "}
-                Nombre de usuario
-                <input
-                  className="register-input"
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Ej. Carlos Felipe"
-                />
-              </label>
-              <label className="register-label" htmlFor="email">
-                {" "}
-                Contraseña
-                <input
-                  className="register-input"
-                  type="password"
-                  name="email"
-                  id="email"
-                  placeholder="Ingresa tu contraseña"
-                />
-              </label>
-              <Button text="Registrarme" type="principal" />
-              <div className="register-login-section">
-                <p>
-                  Ya tengo cuenta:
-                  <Link to="/login"> Iniciar Sesion</Link>
-                </p>
-              </div>
-              <div className="register-terms">
-                <img src={ListChecked} alt="" />
-                <p className="register-terms-text">
-                  Registrandote aceptas nuestros <br />
-                  <Link to="/terms">Terminos y condiciones</Link>
-                </p>
-              </div>
-            </form>
-          </div>
+            Estudiante
+          </label>
+
+          <label htmlFor="selectrole2">
+            <input
+              type="radio"
+              id="selectrole2"
+              name="role"
+              value="Profesional"
+              checked={role === "Profesional"}
+              onChange={(e) => setRole(e.target.value)}
+            />
+            Profesional
+          </label>
+          <Button text="Enviar" fun={updateUser} />
         </div>
       </div>
 

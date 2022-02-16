@@ -1,20 +1,34 @@
 import React from "react";
-import Button from "../Buttons/Button";
 import { useAuth0 } from "@auth0/auth0-react";
+import Button from "../Buttons/Button";
 import Logo from "../../../assets/Logotipo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
 import "./Header.css";
 
+// Apollo
+import { useQuery, gql } from "@apollo/client";
+const OBTENER_USUARIO = gql`
+  query obtenerUsuario($email: String!) {
+    obtenerUsuario(email: $email) {
+      id
+      name
+      role
+    }
+  }
+`;
+
 const Header = () => {
   const navigate = useNavigate();
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
-  console.log(
-    "🚀 ~ file: Header.jsx ~ line 13 ~ isAuthenticated",
-    isAuthenticated
-  );
-  console.log("🚀 ~ file: Header.jsx ~ line 13 ~ user", user);
+  const email = user?.email;
+  const { data } = useQuery(OBTENER_USUARIO, {
+    variables: {
+      email,
+    },
+    skip: !user?.email.includes("@"),
+  });
 
   return (
     <div className="header">
@@ -29,6 +43,7 @@ const Header = () => {
                 className="menu-item "
                 to=""
                 onClick={() => {
+                  localStorage.clear();
                   logout({ returnTo: window.location.origin });
                 }}
               >
@@ -77,6 +92,7 @@ const Header = () => {
               text="Cerrar Sesion"
               type="alert"
               fun={() => {
+                localStorage.clear();
                 logout({ returnTo: window.location.origin });
               }}
               hidden
@@ -85,7 +101,9 @@ const Header = () => {
               text="Mi Perfil"
               type="principal"
               fun={() => {
-                navigate(`/miperfil/estudiante/${user?.email}`);
+                navigate(
+                  `/miperfil/${data?.obtenerUsuario?.role}/${user?.email}`
+                );
               }}
               hidden
             />
@@ -93,7 +111,7 @@ const Header = () => {
               text="Configurar Mi Perfil"
               type="config"
               fun={() => {
-                navigate(`/miperfil/estudiante/config`);
+                navigate(`/miperfil/${data?.obtenerUsuario?.role}/config`);
               }}
               hidden
             />
@@ -123,4 +141,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

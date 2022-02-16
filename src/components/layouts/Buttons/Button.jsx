@@ -11,7 +11,7 @@ const Button = ({
     <button
       type="button"
       className={`btn btn-${type} ${hidden ? "hidden" : ""}`}
-      onClick={fun}
+      onClick={() => fun()}
     >
       {text}
     </button>

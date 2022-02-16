@@ -11,7 +11,39 @@ import CardFeature from "../../../layouts/Cards/CardFeature/CardFeature";
 import RegisterHeader from "../../../../assets/RegisterHeader.svg";
 import VoidImage from "../../../../assets/void.png";
 
+// Apollo
+import { useQuery, gql } from "@apollo/client";
+const OBTENER_USUARIO = gql`
+  query obtenerUsuario($email: String!) {
+    obtenerUsuario(email: $email) {
+      id
+      name
+      role
+    }
+  }
+`;
+
 const ProfileStudent = () => {
+  const params = useParams();
+  console.log("🚀 ~ file: ProfileStudent.jsx ~ line 6 ~ params", params);
+
+  const email = params.email;
+  const { loading, error, data } = useQuery(OBTENER_USUARIO, {
+    variables: {
+      email,
+    },
+    skip: !email.includes("@"),
+  });
+
+  console.log(
+    "🚀 ~ file: ProfileStudent.jsx ~ line 32 ~ loading, error, data",
+    loading,
+    error,
+    data?.obtenerUsuario
+  );
+
+  const realUser = data?.obtenerUsuario;
+
   const userVisited = {
     image: VoidImage,
     name: "Nombre",
@@ -19,8 +51,10 @@ const ProfileStudent = () => {
     careersInterested: "Carrera 1",
     universityInterestedIn: "Universidad 1",
   };
-  const params = useParams();
-  console.log("🚀 ~ file: ProfileStudent.jsx ~ line 6 ~ params", params);
+
+  if (error?.message === "No existe ese Usuario") {
+    return "No existe este usuario";
+  }
 
   return (
     <div className="page-container">
@@ -29,10 +63,10 @@ const ProfileStudent = () => {
         <div className="profile-card">
           <div className="profile-card-header">
             <p className="profile-card-header-title">
-              ¡Bienvenido al perfil de María!
+              ¡Bienvenido al perfil de {realUser?.name}!
             </p>
             <p className="profile-card-header-description">
-              Esta es su informacion pública
+              Esta es su información pública
             </p>
             <img
               className="profile-card-header-img"
@@ -47,7 +81,7 @@ const ProfileStudent = () => {
               className="profile-card-body-image"
             />
             <div className="profile-card-body-block-text">
-              <p>{userVisited?.name}</p>
+              <p>{realUser?.name}</p>
               <span>Estudiante</span>
             </div>
             <div className="profile-card-body-block-text">

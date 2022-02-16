@@ -1,11 +1,11 @@
 import React from "react";
 import Switch from "../../../layouts/Inputs/Switch/Switch";
 
-const CardConnection = ({ connectionState, setConnectionState }) => {
+const CardConnection = ({ fun, status }) => {
   return (
     <div className="config-card">
       <p className="config-card-title">Estado de conexión</p>
-      <Switch fun={setConnectionState} />
+      <Switch fun={fun} status={status}/>
     </div>
   );
 };

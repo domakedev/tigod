@@ -5,16 +5,12 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import "./index.css";
 
 // Apollo GraphQL
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 // Pages
 import App from "./App";
 import TestPage from "./components/pages/TestPage/TestPage";
-// import Register from "./components/pages/Register/Register.jsx";
+import Register from "./components/pages/Register/Register.jsx";
 import NotFound from "./components/pages/P404/P404.jsx";
 import MiVocacion from "./components/pages/MiVocacion/MiVocacion.jsx";
 import ProfileStudent from "./components/pages/Profiles/ProfileStudent/ProfileStudent.jsx";
@@ -39,6 +35,7 @@ render(
           <Route path="/" element={<App />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/mivocacion" element={<MiVocacion />} />
+          <Route path="/registro" element={<Register />} />
           <Route
             path="/miperfil/estudiante/:email"
             element={<ProfileStudent />}

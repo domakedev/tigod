@@ -1,7 +1,7 @@
 import React from "react";
 import "./Switch.css";
 
-const Switch = ({ fun = () => {}, disabled = false }) => {
+const Switch = ({ fun = () => {}, disabled = false, status = false }) => {
   const onChangeHandler = (e) => {
     fun(e.target.checked);
   };
@@ -12,6 +12,7 @@ const Switch = ({ fun = () => {}, disabled = false }) => {
         type="checkbox"
         name=""
         id="checkbox"
+        checked={status}
         onChange={onChangeHandler}
         disabled={disabled}
       />
