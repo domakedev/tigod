@@ -19,6 +19,7 @@ const OBTENER_USUARIO = gql`
       id
       name
       role
+      photo
     }
   }
 `;
@@ -76,7 +77,7 @@ const ProfileStudent = () => {
           </div>
           <div className="profile-card-body">
             <img
-              src={userVisited?.image}
+              src={realUser?.photo}
               alt=""
               className="profile-card-body-image"
             />

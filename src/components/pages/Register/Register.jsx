@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
-// Apollo
-import { gql, useMutation } from "@apollo/client";
 
 // Components
 import Footer from "../../layouts/Footer/Footer";
@@ -15,12 +12,26 @@ import HomeIcon from "../../../assets/icons/home.svg";
 
 import "./Register.css";
 
+// Apollo
+import { gql, useQuery, useMutation } from "@apollo/client";
 const ACTUALIZAR_USUARIO = gql`
   mutation actualizarUsuario($email: String, $input: UsuarioInput) {
     actualizarUsuario(email: $email, input: $input) {
       name
       email
       role
+    }
+  }
+`;
+const OBTENER_USUARIO = gql`
+  query obtenerUsuario($email: String!) {
+    obtenerUsuario(email: $email) {
+      id
+      name
+      role
+      email
+      isOnline
+      photo
     }
   }
 `;
@@ -31,6 +42,25 @@ const Register = () => {
   const { user } = useAuth0();
   console.log("🚀 ~ file: Register.jsx ~ line 31 ~ user", user);
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
+
+  const email = user?.email;
+  const { data } = useQuery(OBTENER_USUARIO, {
+    variables: {
+      email,
+    },
+    skip: !user?.email.includes("@"),
+  });
+  console.log("🚀 ~ file: ProfileStudentConfig.jsx ~ line 49 ~ data", data);
+
+  useEffect(() => {
+    if (data?.obtenerUsuario?.role === "Estudiante") {
+      navigate(`/miperfil/estudiante/${data?.obtenerUsuario?.email}`);
+    }
+    if (data?.obtenerUsuario?.role === "Profesional") {
+      navigate(`/miperfil/profesional/${data?.obtenerUsuario?.email}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const updateUser = async () => {
     console.log("adasd");

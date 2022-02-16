@@ -74,7 +74,7 @@ function App() {
           console.log("🚀 ~ file: App.js ~ line 60 ~ data", data);
           Swal.fire({
             title: "Ingreso exitoso",
-            text: "Selecciona tu perfil por esta sesión",
+            // text: "Selecciona tu perfil por esta sesión",
             icon: "success",
             confirmButtonText: "Ok",
           });

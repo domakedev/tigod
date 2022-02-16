@@ -9,9 +9,10 @@ import Footer from "../../../layouts/Footer/Footer";
 // import Switch from "../../../layouts/Inputs/Switch/Switch";
 import Button from "../../../layouts/Buttons/Button";
 import CardConnection from "../../../layouts/Cards/CardConnection/CardConnection";
+import CardUpdatePhoto from "../../../layouts/Cards/CardUpdatePhoto/CardUpdatePhoto";
 
 // Images
-import VoidImage from "../../../../assets/void.png";
+// import VoidImage from "../../../../assets/void.png";
 
 // Apollo
 import { useMutation, useQuery, gql } from "@apollo/client";
@@ -23,6 +24,7 @@ const OBTENER_USUARIO = gql`
       role
       email
       isOnline
+      photo
     }
   }
 `;
@@ -41,6 +43,7 @@ const ProfileStudentConfig = () => {
   const [configUser, setConfigUser] = useState({
     name: "",
     isOnline: false,
+    photo: "",
   });
 
   const email = user?.email;
@@ -50,6 +53,7 @@ const ProfileStudentConfig = () => {
     },
     skip: !user?.email.includes("@"),
   });
+  console.log("🚀 ~ file: ProfileStudentConfig.jsx ~ line 49 ~ data", data);
 
   useEffect(() => {
     // const datita = data?.obtenerUsuario;
@@ -113,6 +117,13 @@ const ProfileStudentConfig = () => {
     return "Cargando emailito";
   }
 
+  const cargarNuevaFoto = (photo) => {
+    setConfigUser({
+      ...configUser,
+      photo: photo,
+    });
+  };
+
   return (
     <div className="page-container">
       <Header />
@@ -130,20 +141,11 @@ const ProfileStudentConfig = () => {
             onChange={(e) => onChangeName(e)}
           />
         </div>
-        <div className="config-card">
-          <p className="config-card-title">Tu foto de perfil</p>
-          <div className="choose-one-option-config-photo">
-            <label htmlFor="photo1">
-              <img src={VoidImage} alt="" />
-              <input type="radio" name="photo" id="photo1" />
-              Anterior
-            </label>
-            <label htmlFor="photo2">
-              <img src={VoidImage} alt="" />
-              <input type="radio" name="photo" id="photo2" /> Nueva
-            </label>
-          </div>
-        </div>
+        <CardUpdatePhoto
+          prevImage={data?.obtenerUsuario?.photo}
+          newImage={configUser?.photo}
+          cargarNuevaFoto={cargarNuevaFoto}
+        />
 
         <div className="config-card">
           <p className="config-card-title config-card-title_universities">
