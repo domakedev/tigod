@@ -26,6 +26,7 @@ const OBTENER_USUARIO = gql`
       email
       isOnline
       photo
+      workPlaces
     }
   }
 `;
@@ -45,6 +46,7 @@ const ProfileProfessionalConfig = () => {
     name: "",
     isOnline: false,
     photo: "",
+    workPlaces: [{}],
   });
 
   const email = user?.email;
@@ -54,7 +56,6 @@ const ProfileProfessionalConfig = () => {
     },
     skip: !user?.email.includes("@"),
   });
-  console.log("🚀 ~ file: ProfileStudentConfig.jsx ~ line 49 ~ data", data);
 
   useEffect(() => {
     // const datita = data?.obtenerUsuario;
@@ -73,18 +74,9 @@ const ProfileProfessionalConfig = () => {
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   const updateUser = async () => {
-    console.log("actualizand usuario desde profile config");
     try {
-      console.log(
-        "🚀 ~ file: ProfileStudentConfig.jsx ~ line 81 ~ configUser",
-        configUser
-      );
       const { id, __typename, ...enviarUsuario } = configUser;
-      console.log(
-        "🚀 ~ file: ProfileStudentConfig.jsx ~ line 81 ~ enviarUsuario",
-        enviarUsuario
-      );
-      console.log("mega user", user?.email);
+
       // eslint-disable-next-line no-unused-vars
       const { data } = await actualizarUsuario({
         variables: {
@@ -118,6 +110,13 @@ const ProfileProfessionalConfig = () => {
     setConfigUser({
       ...configUser,
       photo: photo,
+    });
+  };
+
+  const updateWorkPlaces = (ciudades) => {
+    setConfigUser({
+      ...configUser,
+      workPlaces: ciudades,
     });
   };
 
@@ -164,7 +163,10 @@ const ProfileProfessionalConfig = () => {
           newImage={configUser?.photo}
           cargarNuevaFoto={cargarNuevaFoto}
         />
-        <CardWorkedCities />
+        <CardWorkedCities
+          updateWorkPlaces={updateWorkPlaces}
+          workPlaces={data?.obtenerUsuario?.workPlaces}
+        />
 
         <CardOneWorkExperience />
 

@@ -22,6 +22,7 @@ const OBTENER_USUARIO = gql`
       role
       photo
       isOnline
+      workPlaces
     }
   }
 `;
@@ -108,8 +109,8 @@ const ProfileProfessional = () => {
               <span>Donde ha trabajado</span>
             </div>
             <div className="profile-card-body-block-text">
-              <p>{userVisited?.citiesOfWork}</p>
-              <span>Lugares donde ha trabajado</span>
+              <p>{realUser?.workPlaces?.length}</p>
+              <span>Ciudades donde ha trabajado</span>
             </div>
           </div>
         </div>
@@ -144,7 +145,7 @@ const ProfileProfessional = () => {
           </div>
         </div>
 
-        <CardMap />
+        <CardMap proWorkPlaces={realUser?.workPlaces} />
       </div>
       <Footer />
     </div>

@@ -13,35 +13,60 @@ import {
 // Icon
 import { visitIconLocation, proIconLocation } from "./IconLocation";
 
-const fakeProWorkPlaces = [
-  ["-7.161630582718947", "-78.51263637785485"], // Cax
-  ["-6.765749874622064", "-79.85013587442238"], // Chix
-  ["-9.934638103136775", "-76.23743643827284"], // Huanuco
-];
-
-const CardMap = ({ proWorkPlaces = fakeProWorkPlaces }) => {
+const CardMap = ({ proWorkPlaces = [] }) => {
+  console.log(
+    "🚀 ~ file: CardMap.jsx ~ line 19 ~ proWorkPlaces",
+    proWorkPlaces
+  );
   //Posicion inicial Lima
   const [position0, setPosition0] = useState([
     "-12.046291689184665",
     "-77.04274940628093",
   ]);
 
-  proWorkPlaces.map((e) => console.log(e));
+  proWorkPlaces.map((e) => console.log("ddddddddd", e));
+
+  const coordenadasCiudad = (ciudad) => {
+    console.log("🚀 ~ file: CardMap.jsx ~ line 28 ~ ciudad", ciudad);
+    switch (ciudad) {
+      case "tacna":
+        console.log("es tacna");
+        return ["-17.970725939394377", "-70.25653251005446"];
+      case "cuzco":
+        return ["-13.542487950183723", "-71.96407851111653"];
+      case "trujillo":
+        return ["-8.110809844530836", "-79.02888650373895"];
+      case "lima":
+        return ["-12.01483566041886", "-77.03808498858163"];
+      case "iquitos":
+        return ["-3.813928984658219", "-73.2278864112746"];
+      case "piura":
+        return ["-5.10636205356632", "-80.72056172597772"];
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="profile-card-map">
       <p className="profile-card-map-title">Donde ha trabajado</p>
-      <MapContainer center={position0} zoom={6}>
+      <MapContainer center={position0} zoom={4}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker icon={proIconLocation} position={proWorkPlaces[0]}></Marker>
         <LocationMarker position0={position0} setPosition0={setPosition0} />
 
-        {proWorkPlaces?.map((coor, i) => (
-          <Marker key={i} icon={proIconLocation} position={coor}></Marker>
-        ))}
+        {proWorkPlaces.length > 0 &&
+          proWorkPlaces?.map((coor, i) => (
+            <Marker
+              key={i}
+              icon={proIconLocation}
+              position={coordenadasCiudad(coor)}
+            >
+              <Popup>El profesional trabajo en: {coor?.toUpperCase()}</Popup>
+            </Marker>
+          ))}
       </MapContainer>
     </div>
   );

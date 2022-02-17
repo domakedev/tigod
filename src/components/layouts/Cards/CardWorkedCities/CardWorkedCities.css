@@ -1,0 +1,5 @@
+.config-card_work-cities {
+  @apply flex
+    flex-wrap
+    gap-3;
+}
