@@ -1,0 +1,7 @@
+.chat-search-user {
+  @apply border-2
+    border-principal
+    rounded-full
+    p-3
+    font-poppins;
+}

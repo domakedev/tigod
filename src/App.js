@@ -54,7 +54,7 @@ function App() {
     if (
       data === undefined &&
       isAuthenticated &&
-      !localStorage.getItem("session")
+      !localStorage.getItem("token")
     ) {
       // Usuario registrado en TIGOD pero no en la DB
       // Registrar usuario en la DB
@@ -70,7 +70,7 @@ function App() {
               },
             },
           });
-          localStorage.setItem("session", email);
+          localStorage.setItem("token", email);
           console.log("🚀 ~ file: App.js ~ line 60 ~ data", data);
           Swal.fire({
             title: "Ingreso exitoso",

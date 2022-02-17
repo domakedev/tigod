@@ -118,6 +118,14 @@ const Header = () => {
               }}
               hidden
             />
+            <Button
+              text="Mis Chats"
+              type="config"
+              fun={() => {
+                navigate(`/chat`);
+              }}
+              hidden
+            />
           </>
         ) : (
           <>

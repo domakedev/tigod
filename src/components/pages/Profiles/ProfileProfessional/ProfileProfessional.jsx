@@ -114,6 +114,7 @@ const ProfileProfessional = () => {
             </div>
           </div>
         </div>
+
         <div className="profile-card-mini">
           <div className="profile-card-mini-texts">
             <p className="profile-card-mini-title">Conversa con el o ella</p>
@@ -123,6 +124,7 @@ const ProfileProfessional = () => {
           </div>
           <img className="profile-card-mini-image" src={ChatIcon} alt="" />
         </div>
+
         <div className="profile-card-experience">
           <p className="profile-card-experience-title">Experiencia</p>
           <div className="profile-card-experiences">
