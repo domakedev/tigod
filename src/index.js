@@ -19,7 +19,7 @@ import ProfileProfessional from "./components/pages/Profiles/ProfileProfessional
 import ProfileProfessionalConfig from "./components/pages/Profiles/ProfileProfessionalConfig/ProfileProfessionalConfig";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: `${process.env.REACT_APP_BACKEND || "http://localhost:4000"}`,
   cache: new InMemoryCache(),
 });
 
