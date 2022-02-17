@@ -44,6 +44,7 @@ render(
             path="/miperfil/estudiante/config"
             element={<ProfileStudentConfig />}
           />
+
           <Route
             path="/miperfil/profesional/:email"
             element={<ProfileProfessional />}
