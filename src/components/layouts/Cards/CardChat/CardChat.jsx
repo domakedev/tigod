@@ -4,8 +4,8 @@ import { ChatEngine, getOrCreateChat } from "react-chat-engine";
 
 import "./CardChat.css";
 
-const DirectChatPage = () => {
-  const [username, setUsername] = useState("");
+const CardChat = ({ chatToEmail }) => {
+  const [username, setUsername] = useState(chatToEmail);
 
   function createDirectChat(creds) {
     getOrCreateChat(
@@ -40,4 +40,4 @@ const DirectChatPage = () => {
   );
 };
 
-export default DirectChatPage;
+export default CardChat;

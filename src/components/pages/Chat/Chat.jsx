@@ -5,9 +5,12 @@ import Header from "../../layouts/Header/Header";
 import Footer from "../../layouts/Footer/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "../../layouts/Buttons/Button";
+import { useSelector } from "react-redux";
 
 const Chat = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const chatToEmail = useSelector((state) => state.chatToEmail);
+  console.log("🚀 ~ file: Chat.jsx ~ line 13 ~ chatToEmail", chatToEmail);
 
   if (!isAuthenticated) {
     return (
@@ -40,7 +43,7 @@ const Chat = () => {
     <div className="page-container">
       <Header />
       <div className="main-content main-content_chat">
-        <CardChat />
+        <CardChat chatToEmail={chatToEmail} />
       </div>
       <Footer />
     </div>

@@ -1,6 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import "./ProfileProfessional.css";
+
+// Redux
+import actions from "../../../../store/actions";
 
 // Images
 import RegisterHeader from "../../../../assets/RegisterHeader.svg";
@@ -19,6 +24,7 @@ const OBTENER_USUARIO = gql`
     obtenerUsuario(email: $email) {
       id
       name
+      email
       role
       photo
       isOnline
@@ -29,6 +35,8 @@ const OBTENER_USUARIO = gql`
 
 const ProfileProfessional = () => {
   const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const email = params.email;
   const { loading, error, data } = useQuery(OBTENER_USUARIO, {
@@ -122,7 +130,19 @@ const ProfileProfessional = () => {
               Abre un chat directo
             </p>
           </div>
-          <img className="profile-card-mini-image" src={ChatIcon} alt="" />
+          <img
+            className="profile-card-mini-image"
+            src={ChatIcon}
+            alt=""
+            onClick={async () => {
+              console.log(
+                "🚀 ~ file: ProfileProfessional.jsx ~ line 138 ~ realUser?.email",
+                realUser?.email
+              );
+              await dispatch(actions.setProToChat(realUser?.email));
+              navigate("/chat");
+            }}
+          />
         </div>
 
         <div className="profile-card-experience">

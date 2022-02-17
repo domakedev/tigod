@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { CHAT_TO } from "./types";
 
 const setChatTo = (email) => ({
