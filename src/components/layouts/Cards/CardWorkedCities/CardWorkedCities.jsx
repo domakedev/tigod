@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CardWorkedCities.css";
 
 const CardWorkedCities = ({ updateWorkPlaces, workPlaces }) => {
-  console.log(
-    "🚀 ~ file: CardWorkedCities.jsx ~ line 4 ~ workPlaces",
-    workPlaces
-  );
+ 
   const [ciudades, setCiudades] = useState({
     tacna: workPlaces?.includes("tacna"),
     cuzco: workPlaces?.includes("cuzco"),
@@ -15,10 +12,8 @@ const CardWorkedCities = ({ updateWorkPlaces, workPlaces }) => {
     piura: workPlaces?.includes("piura"),
   });
 
-  console.log("🚀 ~ file: CardWorkedCities.jsx ~ line 9 ~ ciudades", ciudades);
 
   const onChangeHandler = (e) => {
-    console.log("----->", e.target.name, e.target.checked);
     const ciudad = e.target.name;
     const estado = e.target.checked;
     setCiudades({

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import actions from "../../../store/actions";
+import { useDispatch } from "react-redux";
 
 // Components
 import Footer from "../../layouts/Footer/Footer";
@@ -20,6 +22,8 @@ const ACTUALIZAR_USUARIO = gql`
       name
       email
       role
+      chatUsername
+      chatUserSecret
     }
   }
 `;
@@ -37,10 +41,10 @@ const OBTENER_USUARIO = gql`
 `;
 
 const Register = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [role, setRole] = useState("Estudiante");
   const { user } = useAuth0();
-  console.log("🚀 ~ file: Register.jsx ~ line 31 ~ user", user);
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   const email = user?.email;
@@ -50,7 +54,6 @@ const Register = () => {
     },
     skip: !user?.email.includes("@"),
   });
-  console.log("🚀 ~ file: ProfileStudentConfig.jsx ~ line 49 ~ data", data);
 
   useEffect(() => {
     if (data?.obtenerUsuario?.role === "Estudiante") {
@@ -63,9 +66,8 @@ const Register = () => {
   }, [data]);
 
   const updateUser = async () => {
-    console.log("adasd");
     try {
-      const { data } = await actualizarUsuario({
+      const {data} = await actualizarUsuario({
         variables: {
           email: user?.email,
           input: {
@@ -73,13 +75,13 @@ const Register = () => {
           },
         },
       });
+      await dispatch(actions.saveAuthUser(data?.actualizarUsuario));
       if (role === "Estudiante") {
         navigate("/test");
       }
       if (role === "Profesional") {
         navigate(`/miperfil/profesional/${user?.email}`);
       }
-      console.log("🚀 ~ file: Register.jsx ~ line 37 ~ data", data);
     } catch (error) {
       console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);
     }

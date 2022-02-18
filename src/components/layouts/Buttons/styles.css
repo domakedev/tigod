@@ -1,6 +1,6 @@
 .btn {
   @apply text-white 
-  
+  font-poppins
   sm:block
     font-normal
     text-[13px]

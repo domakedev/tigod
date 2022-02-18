@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
 import Header from "./components/layouts/Header/Header.jsx";
 import Footer from "./components/layouts/Footer/Footer.jsx";
 import CardLanding from "./components/layouts/Cards/CardLanding/CardLanding";
@@ -14,6 +15,7 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 import Professional from "./assets/Landing/profesional.svg";
 import Thinking from "./assets/Landing/Thinking.svg";
 import Parents from "./assets/Landing/Parents.svg";
+const { v4: uuid } = require("uuid");
 
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
@@ -31,6 +33,8 @@ const REGISTRAR_USUARIO = gql`
       name
       email
       role
+      chatUsername
+      chatUserSecret
     }
   }
 `;
@@ -39,7 +43,6 @@ function App() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const [registrarUsuario] = useMutation(REGISTRAR_USUARIO);
-  console.log("🚀 ~ file: App.js ~ line 42 ~ isAuthenticated", isAuthenticated);
 
   const email = user?.email;
   const { data } = useQuery(OBTENER_USUARIO, {
@@ -48,8 +51,8 @@ function App() {
     },
     skip: !user?.email.includes("@"),
   });
-  console.log("🚀 ~ file: App.js ~ line 51 ~ data", data);
 
+ 
   useEffect(() => {
     if (
       data === undefined &&
@@ -60,6 +63,8 @@ function App() {
       // Registrar usuario en la DB
       const registrarEsteUsuario = async () => {
         try {
+          const chatUserSecret = uuid();
+          // eslint-disable-next-line no-unused-vars
           const { data } = await registrarUsuario({
             variables: {
               input: {
@@ -67,11 +72,43 @@ function App() {
                 name: user.name,
                 photo: user.picture || "Sin foto por ahora",
                 role: "vacio",
+                chatUsername: user.email,
+                chatUserSecret: chatUserSecret,
               },
             },
           });
           localStorage.setItem("token", email);
-          console.log("🚀 ~ file: App.js ~ line 60 ~ data", data);
+
+          // Registrar en CHAT ENGINE BACKEND
+          let dataChatEngine = {
+            username: user.email,
+            secret: chatUserSecret,
+            email: user.email,
+            first_name: user.name,
+          };
+
+          var config = {
+            method: "post",
+            url: "https://api.chatengine.io/users/",
+            headers: {
+              "PRIVATE-KEY": `{{${process.env.REACT_APP_CHAT_PRIVATE_KEY}}}`,
+            },
+            data: dataChatEngine,
+          };
+
+          axios(config)
+            .then(function (response) {
+              console.log(
+                "Respuesta de Chat Engine",
+                JSON.stringify(response.data)
+              );
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+          // FIN Registrar en CHAT ENGINE BACKEND
+
           Swal.fire({
             title: "Ingreso exitoso",
             // text: "Selecciona tu perfil por esta sesión",

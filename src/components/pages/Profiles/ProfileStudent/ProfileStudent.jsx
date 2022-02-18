@@ -26,22 +26,16 @@ const OBTENER_USUARIO = gql`
 
 const ProfileStudent = () => {
   const params = useParams();
-  console.log("🚀 ~ file: ProfileStudent.jsx ~ line 6 ~ params", params);
 
   const email = params.email;
-  const { loading, error, data } = useQuery(OBTENER_USUARIO, {
+  const { error, data } = useQuery(OBTENER_USUARIO, {
     variables: {
       email,
     },
     skip: !email.includes("@"),
   });
 
-  console.log(
-    "🚀 ~ file: ProfileStudent.jsx ~ line 32 ~ loading, error, data",
-    loading,
-    error,
-    data?.obtenerUsuario
-  );
+
 
   const realUser = data?.obtenerUsuario;
 

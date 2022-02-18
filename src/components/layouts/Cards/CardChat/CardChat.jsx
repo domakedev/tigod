@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
 import { ChatEngine, getOrCreateChat } from "react-chat-engine";
 
 import "./CardChat.css";
+import Button from "../../Buttons/Button";
 
 const CardChat = () => {
   // eslint-disable-next-line no-unused-vars
   const [username, setUsername] = useState("");
-  const chatToEmail = useSelector((state) => state.chatTo);
-
-  console.log("🚀 ~ file: CardChat.jsx ~ line 9 ~ chatToEmail", chatToEmail);
+  const chatToUser = useSelector((state) => state?.chatTo);
+  const chatUsername = useSelector((state) => state?.authUser?.chatUsername);
+  const chatUserSecret = useSelector(
+    (state) => state?.authUser?.chatUserSecret
+  );
 
   function createDirectChat(creds) {
     getOrCreateChat(
       creds,
-      { is_direct_chat: true, usernames: [chatToEmail] },
+      { is_direct_chat: true, usernames: [chatToUser?.email] },
       () => setUsername("")
     );
   }
@@ -23,30 +25,32 @@ const CardChat = () => {
   function renderChatForm(creds) {
     return (
       <div>
-        {/* <input
-          className="chat-search-user"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        /> */}
-        {chatToEmail ? (
-          <button
-            className="chat-button_start-chat"
-            onClick={() => createDirectChat(creds)}
-          >
-            Iniciar CHAT con: {chatToEmail}
-          </button>
-        ) : null}
+        {chatToUser?.name ? (
+          <Button
+            fun={() => createDirectChat(creds)}
+            text={`Iniciar CHAT con: ${chatToUser?.name}`}
+            type="principal"
+          ></Button>
+        ) : (
+          <Button
+            text="Ve al perfil de tu profesional indicado"
+            type="principal"
+          ></Button>
+        )}
       </div>
     );
+  }
+
+  if (chatUsername === undefined && chatUserSecret === undefined) {
+    return "Cargando chat";
   }
 
   return (
     <ChatEngine
       height="calc( 100vh - 139px)"
-      projectID={process.env.REACT_APP_CHAT_PROYECT_ID}
-      userName="domakedev"
-      userSecret="asd321@"
+      projectID={process.env.REACT_APP_CHAT_PROJECT_ID}
+      userName={chatUsername}
+      userSecret={chatUserSecret}
       renderNewChatForm={(creds) => renderChatForm(creds)}
     />
   );

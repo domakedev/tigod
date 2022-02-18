@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "../Buttons/Button";
 import Logo from "../../../assets/Logotipo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
+import actions from "../../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
 import "./Header.css";
 
 // Apollo
@@ -11,15 +13,19 @@ import { useQuery, gql } from "@apollo/client";
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
-      id
       name
       role
+      email
+      chatUsername
+      chatUserSecret
     }
   }
 `;
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authUser = useSelector((state) => state.authUser);
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
   const email = user?.email;
@@ -29,6 +35,13 @@ const Header = () => {
     },
     skip: !user?.email.includes("@"),
   });
+
+  useEffect(() => {
+    if (data?.obtenerUsuario?.role !== "vacio") {
+      dispatch(actions.saveAuthUser(data?.obtenerUsuario));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <div className="header">
@@ -52,14 +65,14 @@ const Header = () => {
               <br />
               <Link
                 className="menu-item "
-                to={`/miperfil/${data?.obtenerUsuario?.role}/${user?.email}`}
+                to={`/miperfil/${authUser?.role}/${user?.email}`}
               >
                 Mi Perfil
               </Link>
               <br />
               <Link
                 className="menu-item "
-                to={`/miperfil/${data?.obtenerUsuario?.role}/config`}
+                to={`/miperfil/${authUser?.role}/config`}
               >
                 Configurar Mi Perfil
               </Link>
@@ -104,9 +117,7 @@ const Header = () => {
               text="Mi Perfil"
               type="principal"
               fun={() => {
-                navigate(
-                  `/miperfil/${data?.obtenerUsuario?.role}/${user?.email}`
-                );
+                navigate(`/miperfil/${authUser?.role}/${user?.email}`);
               }}
               hidden
             />
@@ -114,7 +125,7 @@ const Header = () => {
               text="Configurar Mi Perfil"
               type="config"
               fun={() => {
-                navigate(`/miperfil/${data?.obtenerUsuario?.role}/config`);
+                navigate(`/miperfil/${authUser?.role}/config`);
               }}
               hidden
             />
@@ -152,4 +163,5 @@ const Header = () => {
   );
 };
 
-export default React.memo(Header);
+// export default React.memo(Header);
+export default Header;

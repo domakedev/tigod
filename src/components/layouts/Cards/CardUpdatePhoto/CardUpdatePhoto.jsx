@@ -11,7 +11,6 @@ const CardUpdatePhoto = ({
 }) => {
   const processFile = async (e) => {
     var file = e.target.files[0];
-    console.log("🚀 ~ file: CardUpdatePhoto.jsx ~ line 10 ~ file", file);
     var formdata = new FormData();
 
     formdata.append("file", file);
@@ -26,10 +25,8 @@ const CardUpdatePhoto = ({
     });
 
     let json = await res.json();
-    console.log("aqui mira la foto nueva", JSON.stringify(json.secure_url));
     const url = JSON.stringify(json.secure_url);
     const newUrl = url.slice(1, url.length - 1);
-    console.log("🚀 ~ file: CardUpdatePhoto.jsx ~ line 32 ~ newUrl", newUrl);
 
     cargarNuevaFoto(newUrl);
   };

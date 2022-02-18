@@ -34,28 +34,23 @@ const OBTENER_USUARIO = gql`
 `;
 
 const ProfileProfessional = () => {
+
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const email = params.email;
-  const { loading, error, data } = useQuery(OBTENER_USUARIO, {
+  const { data } = useQuery(OBTENER_USUARIO, {
     variables: {
       email,
     },
     skip: !email.includes("@"),
   });
 
-  console.log(
-    "🚀 ~ file: ProfileStudent.jsx ~ line 32 ~ loading, error, data",
-    loading,
-    error,
-    data?.obtenerUsuario
-  );
+
 
   const realUser = data?.obtenerUsuario;
 
-  console.log("🚀 ~ file: ProfileProfessional.jsx ~ line 16 ~ params", params);
 
   const userVisited = {
     image: VoidImage,
@@ -135,11 +130,8 @@ const ProfileProfessional = () => {
             src={ChatIcon}
             alt=""
             onClick={async () => {
-              console.log(
-                "🚀 ~ file: ProfileProfessional.jsx ~ line 138 ~ realUser?.email",
-                realUser?.email
-              );
-              await dispatch(actions.setProToChat(realUser?.email));
+             
+              await dispatch(actions.setProToChat(realUser));
               navigate("/chat");
             }}
           />

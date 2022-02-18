@@ -14,23 +14,16 @@ import {
 import { visitIconLocation, proIconLocation } from "./IconLocation";
 
 const CardMap = ({ proWorkPlaces = [] }) => {
-  console.log(
-    "🚀 ~ file: CardMap.jsx ~ line 19 ~ proWorkPlaces",
-    proWorkPlaces
-  );
-  //Posicion inicial Lima
+   //Posicion inicial Lima
   const [position0, setPosition0] = useState([
     "-12.046291689184665",
     "-77.04274940628093",
   ]);
 
-  proWorkPlaces.map((e) => console.log("ddddddddd", e));
 
   const coordenadasCiudad = (ciudad) => {
-    console.log("🚀 ~ file: CardMap.jsx ~ line 28 ~ ciudad", ciudad);
     switch (ciudad) {
       case "tacna":
-        console.log("es tacna");
         return ["-17.970725939394377", "-70.25653251005446"];
       case "cuzco":
         return ["-13.542487950183723", "-71.96407851111653"];

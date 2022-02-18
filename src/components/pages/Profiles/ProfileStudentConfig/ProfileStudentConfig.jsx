@@ -53,7 +53,6 @@ const ProfileStudentConfig = () => {
     },
     skip: !user?.email.includes("@"),
   });
-  console.log("🚀 ~ file: ProfileStudentConfig.jsx ~ line 49 ~ data", data);
 
   useEffect(() => {
     // const datita = data?.obtenerUsuario;
@@ -72,18 +71,10 @@ const ProfileStudentConfig = () => {
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   const updateUser = async () => {
-    console.log("actualizand usuario desde profile config");
     try {
-      console.log(
-        "🚀 ~ file: ProfileStudentConfig.jsx ~ line 81 ~ configUser",
-        configUser
-      );
+     
       const { id, __typename, ...enviarUsuario } = configUser;
-      console.log(
-        "🚀 ~ file: ProfileStudentConfig.jsx ~ line 81 ~ enviarUsuario",
-        enviarUsuario
-      );
-      console.log("mega user", user?.email);
+   
       // eslint-disable-next-line no-unused-vars
       const { data } = await actualizarUsuario({
         variables: {

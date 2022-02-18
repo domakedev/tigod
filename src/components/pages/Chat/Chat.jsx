@@ -32,10 +32,7 @@ const Chat = () => {
       </div>
     );
   }
-  console.log(
-    "🚀 ~ file: Chat.jsx ~ line 11 ~ isAuthenticated",
-    isAuthenticated
-  );
+
   return (
     <div className="page-container">
       <Header />
