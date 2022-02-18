@@ -1,4 +1,5 @@
 .main-content_chat {
   @apply w-full
-  h-full;
+  h-full
+  font-poppins;
 }

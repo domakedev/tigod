@@ -120,7 +120,7 @@ const Header = () => {
             />
             <Button
               text="Mis Chats"
-              type="config"
+              type="principal"
               fun={() => {
                 navigate(`/chat`);
               }}

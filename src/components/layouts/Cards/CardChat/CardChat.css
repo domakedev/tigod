@@ -5,3 +5,23 @@
     p-3
     font-poppins;
 }
+
+.chat-button_start-chat {
+  @apply text-white 
+  
+      sm:block
+        font-normal
+        text-[13px]
+        py-2 
+        px-4 
+        rounded-sm
+        w-fit
+        cursor-pointer
+        m-4
+        select-none
+        transition-all
+        active:translate-y-1
+        bg-warning
+        text-bc-bar
+        font-poppins;
+}
