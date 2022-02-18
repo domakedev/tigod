@@ -14,12 +14,11 @@ import {
 import { visitIconLocation, proIconLocation } from "./IconLocation";
 
 const CardMap = ({ proWorkPlaces = [] }) => {
-   //Posicion inicial Lima
+  //Posicion inicial Lima
   const [position0, setPosition0] = useState([
     "-12.046291689184665",
     "-77.04274940628093",
   ]);
-
 
   const coordenadasCiudad = (ciudad) => {
     switch (ciudad) {
@@ -48,6 +47,7 @@ const CardMap = ({ proWorkPlaces = [] }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
         <LocationMarker position0={position0} setPosition0={setPosition0} />
 
         {proWorkPlaces.length > 0 &&
