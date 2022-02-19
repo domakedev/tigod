@@ -1,7 +1,7 @@
 .test-card {
   @apply w-80
-  border-2
-  border-warning
+  /* border-2 */
+  /* border-warning */
   bg-white
   flex
   flex-col
@@ -10,5 +10,6 @@
   pt-10
   pb-6
   gap-3
-  h-[375px];
+  h-[375px]
+  shadow-lg;
 }

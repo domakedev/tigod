@@ -1,6 +1,6 @@
 .main-content-test {
-  @apply border-2
-  border-alert
+  @apply /* border-2
+  border-alert */
   max-w-5xl  
       flex
       justify-center
