@@ -39,10 +39,25 @@ const REGISTRAR_USUARIO = gql`
   }
 `;
 
+const AUTENTICAR_USUARIO = gql`
+  mutation autenticarUsuario($input: UsuarioInput) {
+    autenticarUsuario(input: $input) {
+      user {
+        email
+        role
+        isOnline
+        photo
+      }
+      token
+    }
+  }
+`;
+
 function App() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const [registrarUsuario] = useMutation(REGISTRAR_USUARIO);
+  const [autenticarUsuario] = useMutation(AUTENTICAR_USUARIO);
 
   const email = user?.email;
   const { data } = useQuery(OBTENER_USUARIO, {
@@ -52,7 +67,23 @@ function App() {
     skip: !user?.email.includes("@"),
   });
 
- 
+  const autenticarEsteUsuario = async () => {
+    try {
+      const { data } = await autenticarUsuario({
+        variables: {
+          input: {
+            email: user.email,
+            isAuth: isAuthenticated,
+          },
+        },
+      });
+      localStorage.setItem("token", data?.autenticarUsuario?.token);
+      console.log("🚀 ~ file: App.js ~ line 147 ~ dataaaaaaaaaaa", data);
+    } catch (error) {
+      console.log("🚀 ~ file: App.js ~ line 155 ~ error", error);
+    }
+  };
+
   useEffect(() => {
     if (
       data === undefined &&
@@ -61,6 +92,7 @@ function App() {
     ) {
       // Usuario registrado en TIGOD pero no en la DB
       // Registrar usuario en la DB
+
       const registrarEsteUsuario = async () => {
         try {
           const chatUserSecret = uuid();
@@ -77,7 +109,7 @@ function App() {
               },
             },
           });
-          localStorage.setItem("token", email);
+          // localStorage.setItem("token", email);
 
           // Registrar en CHAT ENGINE BACKEND
           let dataChatEngine = {
@@ -121,6 +153,13 @@ function App() {
         }
       };
       registrarEsteUsuario();
+    }
+
+    if (data !== undefined && isAuthenticated && user) {
+      // Entra aqui si ya esta registrado y autenticado, pediremos el token
+      // Y guardaremos el tokencitox
+
+      autenticarEsteUsuario();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, user, isAuthenticated]);

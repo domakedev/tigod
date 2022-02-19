@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "apollo-link-context": "^1.0.20",
     "axios": "^0.21.4",
     "graphql": "^16.3.0",
     "leaflet": "^1.7.1",

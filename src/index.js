@@ -3,12 +3,13 @@ import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
+import client from "./config/apollo";
 import store from "./store";
 
 import "./index.css";
 
 // Apollo GraphQL
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 
 // Pages
 import App from "./App";
@@ -21,11 +22,6 @@ import ProfileStudentConfig from "./components/pages/Profiles/ProfileStudentConf
 import ProfileProfessional from "./components/pages/Profiles/ProfileProfessional/ProfileProfessional";
 import ProfileProfessionalConfig from "./components/pages/Profiles/ProfileProfessionalConfig/ProfileProfessionalConfig";
 import Chat from "./components/pages/Chat/Chat.jsx";
-
-const client = new ApolloClient({
-  uri: `${process.env.REACT_APP_BACKEND || "http://localhost:4000"}`,
-  cache: new InMemoryCache(),
-});
 
 render(
   <Auth0Provider

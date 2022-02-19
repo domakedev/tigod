@@ -40,12 +40,27 @@ const OBTENER_USUARIO = gql`
   }
 `;
 
+const AUTENTICAR_USUARIO = gql`
+  mutation autenticarUsuario($input: UsuarioInput) {
+    autenticarUsuario(input: $input) {
+      user {
+        email
+        role
+        isOnline
+        photo
+      }
+      token
+    }
+  }
+`;
+
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [role, setRole] = useState("Estudiante");
-  const { user } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
+  const [autenticarUsuario] = useMutation(AUTENTICAR_USUARIO);
 
   const email = user?.email;
   const { data } = useQuery(OBTENER_USUARIO, {
@@ -54,6 +69,23 @@ const Register = () => {
     },
     skip: !user?.email.includes("@"),
   });
+
+  const autenticarEsteUsuario = async () => {
+    try {
+      const { data } = await autenticarUsuario({
+        variables: {
+          input: {
+            email: user.email,
+            isAuth: isAuthenticated,
+          },
+        },
+      });
+      localStorage.setItem("token", data?.autenticarUsuario?.token);
+      console.log("🚀 ~ file: App.js ~ line 147 ~ dataaaaaaaaaaa", data);
+    } catch (error) {
+      console.log("🚀 ~ file: App.js ~ line 155 ~ error", error);
+    }
+  };
 
   useEffect(() => {
     if (data?.obtenerUsuario?.role === "Estudiante") {
@@ -67,7 +99,7 @@ const Register = () => {
 
   const updateUser = async () => {
     try {
-      const {data} = await actualizarUsuario({
+      const { data } = await actualizarUsuario({
         variables: {
           email: user?.email,
           input: {
@@ -76,6 +108,8 @@ const Register = () => {
         },
       });
       await dispatch(actions.saveAuthUser(data?.actualizarUsuario));
+      autenticarEsteUsuario();
+
       if (role === "Estudiante") {
         navigate("/test");
       }
