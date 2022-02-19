@@ -76,6 +76,10 @@ const Header = () => {
               >
                 Configurar Mi Perfil
               </Link>
+              <br />
+              <Link className="menu-item " to={`/chat`}>
+                Mis chats
+              </Link>
             </>
           ) : (
             <>
