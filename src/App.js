@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Header from "./components/layouts/Header/Header.jsx";
 import Footer from "./components/layouts/Footer/Footer.jsx";
 import CardLanding from "./components/layouts/Cards/CardLanding/CardLanding";
+import actions from "./store/actions";
 import "./App.css";
 
 // Apollo
@@ -20,9 +22,16 @@ const { v4: uuid } = require("uuid");
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
-      id
       name
+      email
       role
+      photo
+      isOnline
+      workPlaces
+      chatUsername
+      chatUserSecret
+      isAuth
+      vocation
     }
   }
 `;
@@ -54,6 +63,7 @@ const AUTENTICAR_USUARIO = gql`
 `;
 
 function App() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const [registrarUsuario] = useMutation(REGISTRAR_USUARIO);
@@ -84,6 +94,10 @@ function App() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (
       data === undefined &&
       isAuthenticated &&
@@ -108,7 +122,6 @@ function App() {
               },
             },
           });
-          // localStorage.setItem("token", email);
 
           // Registrar en CHAT ENGINE BACKEND
           let dataChatEngine = {
@@ -139,13 +152,8 @@ function App() {
             });
 
           // FIN Registrar en CHAT ENGINE BACKEND
-
-          Swal.fire({
-            title: "Ingreso exitoso",
-            // text: "Selecciona tu perfil por esta sesión",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
+          dispatch(actions.saveAuthUser(data?.registrarUsuario));
+          autenticarEsteUsuario();
           navigate("/registro");
         } catch (error) {
           console.log("🚀 ~ file: App.js ~ line 87 ~ error", error);
@@ -159,6 +167,7 @@ function App() {
       // Y guardaremos el tokencitox
 
       autenticarEsteUsuario();
+      dispatch(actions.saveAuthUser(data.obtenerUsuario));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, user, isAuthenticated]);
@@ -183,7 +192,7 @@ function App() {
         <CardLanding
           image={Thinking}
           description="Descubre tu vocacion y conocela de cerca"
-          buttonText="Empecemos"
+          buttonText="Empecemos con el test"
           fun={() => {
             navigate("/test");
           }}

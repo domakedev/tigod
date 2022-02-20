@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import actions from "../../../store/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import Footer from "../../layouts/Footer/Footer";
@@ -16,27 +16,20 @@ import HomeIcon from "../../../assets/icons/home.svg";
 import "./Register.css";
 
 // Apollo
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 const ACTUALIZAR_USUARIO = gql`
   mutation actualizarUsuario($email: String, $input: UsuarioInput) {
     actualizarUsuario(email: $email, input: $input) {
       name
       email
       role
+      photo
+      isOnline
+      workPlaces
       chatUsername
       chatUserSecret
-    }
-  }
-`;
-const OBTENER_USUARIO = gql`
-  query obtenerUsuario($email: String!) {
-    obtenerUsuario(email: $email) {
-      id
-      name
-      role
-      email
-      isOnline
-      photo
+      isAuth
+      vocation
     }
   }
 `;
@@ -59,76 +52,68 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [role, setRole] = useState("Estudiante");
-  const { user, isAuthenticated } = useAuth0();
+  const userAuth = useSelector((state) => state.authUser);
+  const { loginWithRedirect } = useAuth0();
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
   const [autenticarUsuario] = useMutation(AUTENTICAR_USUARIO);
-
-  const email = user?.email;
-  const { data } = useQuery(OBTENER_USUARIO, {
-    variables: {
-      email,
-    },
-    skip: !user?.email.includes("@"),
-  });
 
   const autenticarEsteUsuario = async () => {
     try {
       const { data } = await autenticarUsuario({
         variables: {
           input: {
-            email: user.email,
-            isAuth: isAuthenticated,
+            email: userAuth?.email,
+            isAuth: userAuth ? true : false,
           },
         },
       });
       localStorage.setItem("token", data?.autenticarUsuario?.token);
-      console.log("🚀 ~ file: App.js ~ line 147 ~ dataaaaaaaaaaa", data);
     } catch (error) {
       console.log("🚀 ~ file: App.js ~ line 155 ~ error", error);
     }
   };
 
-  useEffect(() => {
-    if (data?.obtenerUsuario?.role === "Estudiante") {
-      navigate(`/miperfil/estudiante/${data?.obtenerUsuario?.email}`);
-    }
-    if (data?.obtenerUsuario?.role === "Profesional") {
-      navigate(`/miperfil/profesional/${data?.obtenerUsuario?.email}`);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
   const updateUser = async () => {
     try {
       const { data } = await actualizarUsuario({
         variables: {
-          email: user?.email,
+          email: userAuth?.email,
           input: {
             role: role,
           },
         },
       });
-      await dispatch(actions.saveAuthUser(data?.actualizarUsuario));
+
+      dispatch(actions.saveAuthUser(data?.actualizarUsuario));
+
       autenticarEsteUsuario();
 
       if (role === "Estudiante") {
         navigate("/test");
       }
       if (role === "Profesional") {
-        navigate(`/miperfil/profesional/${user?.email}`);
+        navigate(`/miperfil/profesional/${userAuth?.email}`);
       }
     } catch (error) {
       console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);
     }
   };
 
-  if (user === undefined) {
+  if (!userAuth) {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
         <CardAnuncio
-          title="Primero create una cuenta"
-          description="Retrocede al inicio"
-        ></CardAnuncio>
+          title="Primero create una cuenta o inicia sesión"
+          description=" "
+        >
+          <Button
+            type="principal"
+            text="Vamos"
+            fun={() => {
+              loginWithRedirect({ screen_hint: "signup" });
+            }}
+          />
+        </CardAnuncio>
       </div>
     );
   }
@@ -141,9 +126,7 @@ const Register = () => {
 
       <div className="main-content">
         {/* <CardRegister /> */}
-        <h2 className="register-role-title">
-          Para finalizar, selecciona tu tipo de usuario:
-        </h2>
+        <h2 className="register-role-title">Selecciona tu tipo de usuario:</h2>
         <div className="register-select-role">
           <label htmlFor="selectrole1">
             <input

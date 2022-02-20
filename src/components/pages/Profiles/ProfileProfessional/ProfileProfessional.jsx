@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./ProfileProfessional.css";
 
@@ -34,6 +34,7 @@ const OBTENER_USUARIO = gql`
 `;
 
 const ProfileProfessional = () => {
+  const authUser = useSelector((state) => state.authUser);
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -34,7 +34,6 @@ const TestPage = () => {
   const dispatch = useDispatch();
   const authUserEmail = useSelector((state) => state?.authUser?.email);
   const authUserRole = useSelector((state) => state?.authUser?.role);
-  console.log("🚀 ~ file: TestPage.jsx ~ line 37 ~ authUserRole", authUserRole);
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   // States
@@ -114,7 +113,7 @@ const TestPage = () => {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
         <CardAnuncio
-          title="Para tomar el test debes ser un estudiante"
+          title="Para tomar el test debes ser un estudiante o tener una cuenta"
           description=" "
         >
           <Button
@@ -122,6 +121,13 @@ const TestPage = () => {
             text="Registrarme"
             fun={() => {
               loginWithRedirect({ screen_hint: "signup" });
+            }}
+          />
+          <Button
+            type="principal"
+            text="Seleccionar perfil"
+            fun={() => {
+              navigate("/registro");
             }}
           />
         </CardAnuncio>

@@ -1,51 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "../Buttons/Button";
 import Logo from "../../../assets/Logotipo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
-import actions from "../../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./Header.css";
 
-// Apollo
-import { useQuery, gql } from "@apollo/client";
-const OBTENER_USUARIO = gql`
-  query obtenerUsuario($email: String!) {
-    obtenerUsuario(email: $email) {
-      name
-      role
-      email
-      chatUsername
-      chatUserSecret
-    }
-  }
-`;
-
 const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const authUser = useSelector((state) => state.authUser);
-  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout } = useAuth0();
 
-  const email = user?.email;
-  const { data } = useQuery(OBTENER_USUARIO, {
-    variables: {
-      email,
-    },
-    skip: !user?.email.includes("@"),
-  });
-
-  useEffect(() => {
-    if (data?.obtenerUsuario?.role !== "vacio" && data) {
-      console.log(
-        "🚀 ~ file: Header.jsx ~ line 42 ~ data?.obtenerUsuario",
-        data
-      );
-      dispatch(actions.saveAuthUser(data?.obtenerUsuario));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
 
   return (
     <div className="header">
@@ -54,7 +20,7 @@ const Header = () => {
       </Link>
       <div className="header_buttons">
         <Menu right isOpen={false}>
-          {isAuthenticated ? (
+          {authUser ? (
             <>
               <Link
                 className="menu-item "
@@ -69,7 +35,7 @@ const Header = () => {
               <br />
               <Link
                 className="menu-item "
-                to={`/miperfil/${authUser?.role}/${user?.email}`}
+                to={`/miperfil/${authUser?.role}/${authUser?.email}`}
               >
                 Mi Perfil
               </Link>
@@ -110,7 +76,7 @@ const Header = () => {
           )}
         </Menu>
         <div></div>
-        {isAuthenticated ? (
+        {authUser ? (
           <>
             <Button
               text="Cerrar Sesion"
@@ -125,7 +91,7 @@ const Header = () => {
               text="Mi Perfil"
               type="principal"
               fun={() => {
-                navigate(`/miperfil/${authUser?.role}/${user?.email}`);
+                navigate(`/miperfil/${authUser?.role}/${authUser?.email}`);
               }}
               hidden
             />

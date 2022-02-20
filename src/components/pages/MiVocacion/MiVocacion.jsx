@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import "./MiVocacion.css";
 
@@ -10,6 +10,7 @@ import Header from "../../layouts/Header/Header";
 import Footer from "../../layouts/Footer/Footer";
 import CardCareer from "../../layouts/Cards/CardCareer/CardCareer";
 import CardProfessional from "../../layouts/Cards/CardProfessional/CardProfessional";
+import Button from "../../layouts/Buttons/Button";
 
 // Icon & Images
 import Star from "../../../assets/icons/star.svg";
@@ -19,14 +20,6 @@ import SistemasImage from "../../../assets/Career/sistemas.jfif";
 const { v4: uuid } = require("uuid");
 
 // Apollo
-const OBTENER_USUARIO = gql`
-  query obtenerUsuario($email: String!) {
-    obtenerUsuario(email: $email) {
-      vocation
-    }
-  }
-`;
-
 const OBTENER_USUARIOS = gql`
   query ObtenerUsuarios {
     obtenerUsuarios {
@@ -40,34 +33,11 @@ const OBTENER_USUARIOS = gql`
 
 const MiVocacion = () => {
   const navigate = useNavigate();
-  const miVocacion = useSelector((state) => state.miVocacion);
-  const [finalVocation, setFinalVocation] = useState(miVocacion);
+  const miVocacion = useSelector((state) => state.authUser?.vocation);
   const [myVocationDetails, setMyVocationDetails] = useState({});
   const [professionals, setProfessionals] = useState();
 
-  const authUserEmail = useSelector((state) => state?.authUser?.email);
-
-  const [obtenerUsuario] = useLazyQuery(OBTENER_USUARIO);
   const { data } = useQuery(OBTENER_USUARIOS);
-
-  useEffect(() => {
-    const bringMyVocation = async () => {
-      try {
-        const { data } = await obtenerUsuario({
-          variables: {
-            email: authUserEmail,
-          },
-        });
-        setFinalVocation(data?.obtenerUsuario?.vocation);
-      } catch (error) {
-        console.log("🚀 ~ file: MiVocacion.jsx ~ line 41 ~ error", error);
-      }
-    };
-    if (!miVocacion && authUserEmail && !finalVocation) {
-      bringMyVocation();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [miVocacion, authUserEmail]);
 
   const TrabajoTecnologico = {
     description: "Eres una persona con gran pasion por la tecnologia",
@@ -92,9 +62,9 @@ const MiVocacion = () => {
   };
 
   useEffect(() => {
-    if (finalVocation) {
+    if (miVocacion) {
       // Se probo tanto por test como por DB
-      switch (finalVocation) {
+      switch (miVocacion) {
         case " ":
           break;
 
@@ -104,8 +74,9 @@ const MiVocacion = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finalVocation]);
+  }, [miVocacion]);
 
+  // Esta llamada solo mockea data de profesionales
   useEffect(() => {
     if (data?.obtenerUsuarios) {
       const profs = data?.obtenerUsuarios?.filter(
@@ -114,6 +85,22 @@ const MiVocacion = () => {
       setProfessionals(profs);
     }
   }, [data]);
+
+  if (!miVocacion) {
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <CardAnuncio title="Aun no sabemos tu vocación" description=" ">
+          <Button
+            type="principal"
+            text="Has el test primero"
+            fun={() => {
+              navigate("/");
+            }}
+          />
+        </CardAnuncio>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container">
