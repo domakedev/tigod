@@ -27,7 +27,7 @@
   @apply text-sm
         font-normal
         text-principal
-        w-2/3;
+        w-2/3
 }
 .profile-card-header-img {
   @apply absolute

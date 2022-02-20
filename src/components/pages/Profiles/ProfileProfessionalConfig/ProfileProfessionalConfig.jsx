@@ -43,6 +43,8 @@ const ACTUALIZAR_USUARIO = gql`
 
 const ProfileProfessionalConfig = () => {
   const { user } = useAuth0();
+  const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
+
   const [configUser, setConfigUser] = useState({
     name: "",
     isOnline: false,
@@ -59,7 +61,6 @@ const ProfileProfessionalConfig = () => {
   });
 
   useEffect(() => {
-    // const datita = data?.obtenerUsuario;
     if (data?.obtenerUsuario?.email) {
       setConfigUser(data.obtenerUsuario);
     }
@@ -71,8 +72,6 @@ const ProfileProfessionalConfig = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   const updateUser = async () => {
     try {

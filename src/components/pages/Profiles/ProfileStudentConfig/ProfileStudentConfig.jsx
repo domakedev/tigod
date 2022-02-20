@@ -103,10 +103,7 @@ const ProfileStudentConfig = () => {
   if (!data?.obtenerUsuario?.email) {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
-        <CardAnuncio
-          title="Primero inicia sesión"
-          description=" "
-        ></CardAnuncio>
+        <CardAnuncio title="Cargando..." description=" "></CardAnuncio>
       </div>
     );
   }
@@ -148,11 +145,11 @@ const ProfileStudentConfig = () => {
           <div className="config-card_universities">
             <label htmlFor="u1">
               <input type="checkbox" name="upao" id="u1" />
-              {""} U1
+              {""} ---
             </label>
             <label htmlFor="u2">
               <input type="checkbox" name="upao" id="u2" />
-              {""} Universidad nombre 2
+              {""} ---
             </label>
           </div>
         </div>
@@ -164,11 +161,11 @@ const ProfileStudentConfig = () => {
           <div className="config-card_universities">
             <label htmlFor="m1">
               <input type="checkbox" name="upao" id="m1" />
-              {""} M1
+              {""} ---
             </label>
             <label htmlFor="m2">
               <input type="checkbox" name="upao" id="m2" />
-              {""} MEta nombre 2
+              {""} ---
             </label>
           </div>
         </div>
@@ -180,11 +177,11 @@ const ProfileStudentConfig = () => {
           <div className="config-card_universities">
             <label htmlFor="c1">
               <input type="checkbox" name="upao" id="c1" />
-              {""} C1
+              {""} ---
             </label>
             <label htmlFor="c2">
               <input type="checkbox" name="upao" id="c2" />
-              {""} Cualidad nombre 2
+              {""} ---
             </label>
           </div>
         </div>

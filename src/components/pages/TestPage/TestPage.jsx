@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../../../store/actions";
 import Button from "../../layouts/Buttons/Button";
@@ -26,10 +28,13 @@ const ACTUALIZAR_USUARIO = gql`
 `;
 
 const TestPage = () => {
+  const { loginWithRedirect } = useAuth0();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUserEmail = useSelector((state) => state?.authUser?.email);
   const authUserRole = useSelector((state) => state?.authUser?.role);
+  console.log("🚀 ~ file: TestPage.jsx ~ line 37 ~ authUserRole", authUserRole);
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   // States
@@ -111,7 +116,15 @@ const TestPage = () => {
         <CardAnuncio
           title="Para tomar el test debes ser un estudiante"
           description=" "
-        ></CardAnuncio>
+        >
+          <Button
+            type="principal"
+            text="Registrarme"
+            fun={() => {
+              loginWithRedirect({ screen_hint: "signup" });
+            }}
+          />
+        </CardAnuncio>
       </div>
     );
   }

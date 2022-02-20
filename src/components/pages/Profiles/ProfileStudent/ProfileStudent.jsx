@@ -87,6 +87,7 @@ const ProfileStudent = () => {
               alt=""
               className="profile-card-body-image"
             />
+
             <div className="profile-card-body-block-text">
               <p>{realUser?.name}</p>
               <span>Estudiante</span>

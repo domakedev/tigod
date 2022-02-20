@@ -39,6 +39,25 @@
     right-2;
 }
 
+.profile-status_on {
+  @apply w-[20px]
+      h-[20px]
+      rounded-full
+      absolute
+      right-0
+      bottom-0
+      bg-success;
+}
+.profile-status_off {
+  @apply w-[20px]
+      h-[20px]
+      rounded-full
+      absolute
+      right-0
+      bottom-0
+      bg-alert;
+}
+
 .profile-card-body {
   @apply pt-[50px] pb-[14px]
     px-[34px]

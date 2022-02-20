@@ -37,7 +37,11 @@ const Header = () => {
   });
 
   useEffect(() => {
-    if (data?.obtenerUsuario?.role !== "vacio") {
+    if (data?.obtenerUsuario?.role !== "vacio" && data) {
+      console.log(
+        "🚀 ~ file: Header.jsx ~ line 42 ~ data?.obtenerUsuario",
+        data
+      );
       dispatch(actions.saveAuthUser(data?.obtenerUsuario));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
