@@ -16,7 +16,7 @@ const CardCareer = ({
       <div className="career-card-texts">
         <p className="career-card-title">{title}</p>
         <p className="career-card-description">{description}</p>
-        <img className="career-card-emoji" src={emoji} alt="emoji" />
+        {/* <img className="career-card-emoji" src={emoji} alt="emoji" /> */}
         <Button text="Conocer mas" type="principal" fun={fun} />
       </div>
     </div>

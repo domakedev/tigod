@@ -22,7 +22,8 @@
     text-sm
     mt-20
     mb-4
-    max-w-[230px];
+    max-w-[230px]
+    mx-auto;
 }
 
 .professionals-title {

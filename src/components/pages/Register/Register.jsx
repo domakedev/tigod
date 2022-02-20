@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 // Components
 import Footer from "../../layouts/Footer/Footer";
 import Button from "../../layouts/Buttons/Button";
+import CardAnuncio from "../../layouts/Cards/CardAnuncio/CardAnuncio";
 // import CardRegister from "../../layouts/Cards/CardRegister/CardRegister";
 
 // Icons & Images
@@ -122,7 +123,14 @@ const Register = () => {
   };
 
   if (user === undefined) {
-    return "cargando... pue";
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <CardAnuncio
+          title="Primero create una cuenta"
+          description="Retrocede al inicio"
+        ></CardAnuncio>
+      </div>
+    );
   }
 
   return (

@@ -57,3 +57,7 @@
   @apply w-10
     h-10;
 }
+
+.profesional-place {
+  @apply max-w-full break-all;
+}

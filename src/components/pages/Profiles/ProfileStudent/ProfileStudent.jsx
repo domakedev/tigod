@@ -1,11 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import "./ProfileStudent.css";
 
 // Components
 import Header from "../../../layouts/Header/Header";
 import Footer from "../../../layouts/Footer/Footer";
 import CardFeature from "../../../layouts/Cards/CardFeature/CardFeature";
+import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
 
 // Images
 import RegisterHeader from "../../../../assets/RegisterHeader.svg";
@@ -26,6 +28,7 @@ const OBTENER_USUARIO = gql`
 
 const ProfileStudent = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const email = params.email;
   const { error, data } = useQuery(OBTENER_USUARIO, {
@@ -35,20 +38,29 @@ const ProfileStudent = () => {
     skip: !email.includes("@"),
   });
 
-
-
   const realUser = data?.obtenerUsuario;
 
   const userVisited = {
     image: VoidImage,
-    name: "Nombre",
-    profession: "Profesion",
-    careersInterested: "Carrera 1",
-    universityInterestedIn: "Universidad 1",
+    name: "---",
+    profession: "---",
+    careersInterested: "---",
+    universityInterestedIn: "---",
   };
 
   if (error?.message === "No existe ese Usuario") {
-    return "No existe este usuario";
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <CardAnuncio
+          title="Parece que no deberias estar aqui"
+          description=" "
+        ></CardAnuncio>
+      </div>
+    );
+  }
+
+  if (realUser?.role !== "Estudiante") {
+    navigate("/");
   }
 
   return (

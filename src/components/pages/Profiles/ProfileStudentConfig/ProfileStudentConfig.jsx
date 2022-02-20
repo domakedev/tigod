@@ -10,6 +10,7 @@ import Footer from "../../../layouts/Footer/Footer";
 import Button from "../../../layouts/Buttons/Button";
 import CardConnection from "../../../layouts/Cards/CardConnection/CardConnection";
 import CardUpdatePhoto from "../../../layouts/Cards/CardUpdatePhoto/CardUpdatePhoto";
+import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
 
 // Images
 // import VoidImage from "../../../../assets/void.png";
@@ -72,9 +73,8 @@ const ProfileStudentConfig = () => {
 
   const updateUser = async () => {
     try {
-     
       const { id, __typename, ...enviarUsuario } = configUser;
-   
+
       // eslint-disable-next-line no-unused-vars
       const { data } = await actualizarUsuario({
         variables: {
@@ -101,7 +101,14 @@ const ProfileStudentConfig = () => {
   };
 
   if (!data?.obtenerUsuario?.email) {
-    return "Cargando emailito";
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <CardAnuncio
+          title="Primero inicia sesión"
+          description=" "
+        ></CardAnuncio>
+      </div>
+    );
   }
 
   const cargarNuevaFoto = (photo) => {

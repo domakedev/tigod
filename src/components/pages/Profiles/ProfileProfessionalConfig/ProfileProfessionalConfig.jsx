@@ -14,6 +14,7 @@ import Button from "../../../layouts/Buttons/Button";
 import CardUpdatePhoto from "../../../layouts/Cards/CardUpdatePhoto/CardUpdatePhoto";
 import CardWorkedCities from "../../../layouts/Cards/CardWorkedCities/CardWorkedCities";
 import CardOneWorkExperience from "../../../layouts/Cards/CardOneWorkExperience/CardOneWorkExperience";
+import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
 
 // Apollo
 import { useMutation, useQuery, gql } from "@apollo/client";
@@ -102,10 +103,6 @@ const ProfileProfessionalConfig = () => {
     });
   };
 
-  if (!data?.obtenerUsuario?.email) {
-    return "Cargando emailito";
-  }
-
   const cargarNuevaFoto = (photo) => {
     setConfigUser({
       ...configUser,
@@ -119,6 +116,17 @@ const ProfileProfessionalConfig = () => {
       workPlaces: ciudades,
     });
   };
+
+  if (!data?.obtenerUsuario?.email) {
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <CardAnuncio
+          title="Cargando..."
+          description="Por favor espera"
+        ></CardAnuncio>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container">

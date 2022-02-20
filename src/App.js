@@ -78,7 +78,6 @@ function App() {
         },
       });
       localStorage.setItem("token", data?.autenticarUsuario?.token);
-      console.log("🚀 ~ file: App.js ~ line 147 ~ dataaaaaaaaaaa", data);
     } catch (error) {
       console.log("🚀 ~ file: App.js ~ line 155 ~ error", error);
     }
@@ -172,6 +171,14 @@ function App() {
           image={Professional}
           description="Genera ingresos con tu experiencia"
           buttonText="Muestrame"
+          fun={() => {
+            Swal.fire({
+              title: "Pronto implementaremos esta funcion",
+              // text: "Selecciona tu perfil por esta sesión",
+              icon: "info",
+              confirmButtonText: "Ok",
+            });
+          }}
         />
         <CardLanding
           image={Thinking}
@@ -185,6 +192,14 @@ function App() {
           image={Parents}
           description="Ayuda a tus hijos a descubrir su vocacion"
           buttonText="Saber más"
+          fun={() => {
+            Swal.fire({
+              title: "Pronto implementaremos esta funcion",
+              // text: "Selecciona tu perfil por esta sesión",
+              icon: "info",
+              confirmButtonText: "Ok",
+            });
+          }}
         />
       </div>
       <Footer />

@@ -1,0 +1,15 @@
+.page-404 {
+  @apply font-poppins
+  min-h-screen
+  min-w-full
+  flex
+  flex-col
+  gap-5
+  justify-center
+  items-center;
+}
+
+.page-404-img {
+  @apply w-60
+  h-60;
+}

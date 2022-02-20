@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -34,7 +34,6 @@ const OBTENER_USUARIO = gql`
 `;
 
 const ProfileProfessional = () => {
-
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,20 +46,26 @@ const ProfileProfessional = () => {
     skip: !email.includes("@"),
   });
 
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const realUser = data?.obtenerUsuario;
 
-
   const userVisited = {
     image: VoidImage,
-    name: "Nombre",
-    profession: "Profesion",
-    actualWorkPlace: "WORKPLACE",
-    yearsOfExperience: 7,
-    numberOfWorks: 5,
-    citiesOfWork: "Ciudad1",
+    name: "---",
+    profession: "---",
+    actualWorkPlace: "---",
+    yearsOfExperience: "---",
+    numberOfWorks: "---",
+    citiesOfWork: "---",
   };
+
+  if (realUser?.role !== "Profesional") {
+    navigate("/");
+  }
+
   return (
     <div className="page-container">
       <Header />
@@ -130,7 +135,6 @@ const ProfileProfessional = () => {
             src={ChatIcon}
             alt=""
             onClick={async () => {
-             
               await dispatch(actions.setProToChat(realUser));
               navigate("/chat");
             }}
@@ -147,8 +151,8 @@ const ProfileProfessional = () => {
                 className="professional-experience-icon"
               />
               <div className="professional-experience-texts">
-                <p className="experience-texts-occupation">Ocupation</p>
-                <p className="experience-texts-company">Company</p>
+                <p className="experience-texts-occupation">Puesto</p>
+                <p className="experience-texts-company">Empresa</p>
                 <div className="experience-texts-times">
                   <p className="experience-texts-times">2011</p>
                   <span>-</span>

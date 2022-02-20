@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CardMap.css";
+import { visitIconLocation, proIconLocation } from "./IconLocation";
 
 // LeaflettMap
 import {
@@ -11,7 +11,9 @@ import {
 } from "react-leaflet";
 
 // Icon
-import { visitIconLocation, proIconLocation } from "./IconLocation";
+import "./CardMap.css";
+
+const { v4: uuid } = require("uuid");
 
 const CardMap = ({ proWorkPlaces = [] }) => {
   //Posicion inicial Lima
@@ -53,7 +55,7 @@ const CardMap = ({ proWorkPlaces = [] }) => {
         {proWorkPlaces.length > 0 &&
           proWorkPlaces?.map((coor, i) => (
             <Marker
-              key={i}
+              key={uuid()}
               icon={proIconLocation}
               position={coordenadasCiudad(coor)}
             >

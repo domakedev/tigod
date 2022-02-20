@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { ChatEngine, getOrCreateChat } from "react-chat-engine";
 
 import "./CardChat.css";
+import CardAnuncio from "../CardAnuncio/CardAnuncio";
 import Button from "../../Buttons/Button";
 
 const CardChat = () => {
@@ -42,7 +43,14 @@ const CardChat = () => {
   }
 
   if (chatUsername === undefined && chatUserSecret === undefined) {
-    return "Cargando chat";
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <CardAnuncio
+          title="Cargando chat"
+          description="Por favor espera"
+        ></CardAnuncio>
+      </div>
+    );
   }
 
   return (

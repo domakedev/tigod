@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { CHAT_TO, AUTH_USER } from "./types";
+import { CHAT_TO, AUTH_USER, MY_VOCATION } from "./types";
 
 // Chat
 const setChatTo = (email) => ({
@@ -11,10 +11,12 @@ const setAuthUser = (user) => ({
   type: AUTH_USER,
   payload: user,
 });
+const setUserVocation = (vocacion) => ({
+  type: MY_VOCATION,
+  payload: vocacion,
+});
 
-// Answer
-
-// Answer loadOnlyPost
+// Chat
 const setProToChat = (user) => async (dispatch) => {
   try {
     dispatch(setChatTo(user));
@@ -23,9 +25,18 @@ const setProToChat = (user) => async (dispatch) => {
   }
 };
 
+// User
 const saveAuthUser = (user) => async (dispatch) => {
   try {
     dispatch(setAuthUser(user));
+  } catch (e) {
+    console.log(e);
+  }
+};
+const saveMyVocation = (vocation) => async (dispatch) => {
+  try {
+    // Guardar en la DB con Apollo
+    dispatch(setUserVocation(vocation));
   } catch (e) {
     console.log(e);
   }
@@ -34,4 +45,5 @@ const saveAuthUser = (user) => async (dispatch) => {
 export default {
   setProToChat,
   saveAuthUser,
+  saveMyVocation,
 };

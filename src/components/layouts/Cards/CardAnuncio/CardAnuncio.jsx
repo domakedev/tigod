@@ -1,9 +1,10 @@
 import React from "react";
+import Pointer from "../../../../assets/icons/pointer.svg";
 import "./CardAnuncio.css";
 
 const CardAnuncio = ({
   title = "Titulo",
-  icon,
+  icon = { Pointer },
   description = "Descripcion",
 }) => {
   return (

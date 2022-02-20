@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 /* eslint-disable no-case-declarations */
 /* eslint-disable default-param-last */
-import { CHAT_TO, AUTH_USER } from "./types";
+import { CHAT_TO, AUTH_USER, MY_VOCATION } from "./types";
 
 const initialState = {
   chatTo: {},
-  authUser: {}
+  authUser: {},
+  miVocacion: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,6 +19,8 @@ const reducer = (state = initialState, action) => {
     // USER
     case AUTH_USER:
       return { ...state, authUser: newValue };
+    case MY_VOCATION:
+      return { ...state, miVocacion: newValue };
 
     default:
       return state;
