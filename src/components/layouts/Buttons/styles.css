@@ -1,7 +1,7 @@
 .btn {
   @apply text-white 
   font-poppins
-  sm:block
+  md:block
     font-normal
     text-[13px]
     py-2 

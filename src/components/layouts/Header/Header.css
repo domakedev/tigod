@@ -29,7 +29,7 @@
   right: 36px;
   top: 27px;
 }
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .bm-burger-button {
     display: none;
   }

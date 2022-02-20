@@ -52,7 +52,7 @@ const ProfileStudent = () => {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
         <CardAnuncio
-          title="Parece que no deberias estar aqui"
+          title="Parece que no deberías estar aquí"
           description=" "
         ></CardAnuncio>
       </div>
