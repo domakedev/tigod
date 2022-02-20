@@ -123,6 +123,8 @@ function App() {
             },
           });
 
+          console.log("aqui");
+
           // Registrar en CHAT ENGINE BACKEND
           let dataChatEngine = {
             username: user.email,
@@ -165,7 +167,7 @@ function App() {
     if (data !== undefined && isAuthenticated && user) {
       // Entra aqui si ya esta registrado y autenticado, pediremos el token
       // Y guardaremos el tokencitox
-
+      console.log("o aqui?");
       autenticarEsteUsuario();
       dispatch(actions.saveAuthUser(data.obtenerUsuario));
     }
