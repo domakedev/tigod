@@ -4,7 +4,7 @@ import Button from "../Buttons/Button";
 import Logo from "../../../assets/Logotipo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { slide as Menu } from "react-burger-menu";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./Header.css";
 
 const Header = () => {
