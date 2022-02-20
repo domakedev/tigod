@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./ProfileStudentConfig.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import actions from "../../../../store/actions";
 
 // Components
 import Header from "../../../layouts/Header/Header";
@@ -11,9 +13,6 @@ import Button from "../../../layouts/Buttons/Button";
 import CardConnection from "../../../layouts/Cards/CardConnection/CardConnection";
 import CardUpdatePhoto from "../../../layouts/Cards/CardUpdatePhoto/CardUpdatePhoto";
 import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
-
-// Images
-// import VoidImage from "../../../../assets/void.png";
 
 // Apollo
 import { useMutation, useQuery, gql } from "@apollo/client";
@@ -26,6 +25,7 @@ const OBTENER_USUARIO = gql`
       email
       isOnline
       photo
+      universityInterestedIn
     }
   }
 `;
@@ -40,11 +40,13 @@ const ACTUALIZAR_USUARIO = gql`
 `;
 
 const ProfileStudentConfig = () => {
+  const dispatch = useDispatch();
   const { user } = useAuth0();
   const [configUser, setConfigUser] = useState({
     name: "",
     isOnline: false,
     photo: "",
+    universityInterestedIn: [""],
   });
 
   const email = user?.email;
@@ -62,17 +64,11 @@ const ProfileStudentConfig = () => {
     }
   }, [data]);
 
-  const onChangeName = (e) => {
-    setConfigUser({
-      ...configUser,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
 
   const updateUser = async () => {
     try {
+      // Actualizar DB
       const { id, __typename, ...enviarUsuario } = configUser;
 
       // eslint-disable-next-line no-unused-vars
@@ -88,9 +84,23 @@ const ProfileStudentConfig = () => {
         icon: "success",
         confirmButtonText: "Ok",
       });
+
+      // Actualizar Frontend
+      console.log(
+        "🚀 ~ file: ProfileStudentConfig.jsx ~ line 90 ~ configUser?.universityInterestedIn",
+        configUser?.universityInterestedIn
+      );
+      dispatch(actions.saveMyUnisInteres(configUser?.universityInterestedIn));
     } catch (error) {
       console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);
     }
+  };
+
+  const onChangeName = (e) => {
+    setConfigUser({
+      ...configUser,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const definirEstado = (estado) => {
@@ -100,6 +110,44 @@ const ProfileStudentConfig = () => {
     });
   };
 
+  const cargarNuevaFoto = (photo) => {
+    setConfigUser({
+      ...configUser,
+      photo: photo,
+    });
+  };
+
+  const definirUniInteres = (e) => {
+    const name = e.target.name;
+    const status = e.target.checked;
+    // Si es true agregar
+    if (status === true) {
+      const nuevoConfigUser = { ...configUser };
+
+      if (!nuevoConfigUser.universityInterestedIn) {
+        nuevoConfigUser["universityInterestedIn"] = [];
+      }
+
+      const nuevoArr = [...nuevoConfigUser["universityInterestedIn"]];
+
+      nuevoArr.push(name);
+
+      setConfigUser({
+        ...configUser,
+        universityInterestedIn: nuevoArr,
+      });
+    } else if (status === false) {
+      const nuevoConfigUser = { ...configUser };
+      const quitado = nuevoConfigUser.universityInterestedIn.filter(
+        (u) => u !== name
+      );
+      setConfigUser({
+        ...configUser,
+        universityInterestedIn: quitado,
+      });
+    }
+  };
+
   if (!data?.obtenerUsuario?.email) {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
@@ -107,13 +155,6 @@ const ProfileStudentConfig = () => {
       </div>
     );
   }
-
-  const cargarNuevaFoto = (photo) => {
-    setConfigUser({
-      ...configUser,
-      photo: photo,
-    });
-  };
 
   return (
     <div className="page-container">
@@ -143,13 +184,41 @@ const ProfileStudentConfig = () => {
             Universidades de interés
           </p>
           <div className="config-card_universities">
-            <label htmlFor="u1">
-              <input type="checkbox" name="upao" id="u1" />
-              {""} ---
+            <label htmlFor="UPAO">
+              <input
+                type="checkbox"
+                name="UPAO"
+                id="UPAO"
+                checked={configUser?.universityInterestedIn?.includes("UPAO")}
+                onChange={(e) => {
+                  definirUniInteres(e);
+                }}
+              />
+              {""} UPAO
             </label>
-            <label htmlFor="u2">
-              <input type="checkbox" name="upao" id="u2" />
-              {""} ---
+            <label htmlFor="UPN">
+              <input
+                type="checkbox"
+                name="UPN"
+                id="UPN"
+                checked={configUser?.universityInterestedIn?.includes("UPN")}
+                onChange={(e) => {
+                  definirUniInteres(e);
+                }}
+              />
+              {""} UPN
+            </label>
+            <label htmlFor="UNT">
+              <input
+                type="checkbox"
+                name="UNT"
+                id="UNT"
+                checked={configUser?.universityInterestedIn?.includes("UNT")}
+                onChange={(e) => {
+                  definirUniInteres(e);
+                }}
+              />
+              {""} UNT
             </label>
           </div>
         </div>

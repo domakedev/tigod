@@ -22,13 +22,16 @@ import CardMap from "../../../layouts/Cards/CardMap/CardMap";
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
-      id
       name
       email
       role
       photo
       isOnline
       workPlaces
+      chatUsername
+      chatUserSecret
+      isAuth
+      vocation
     }
   }
 `;

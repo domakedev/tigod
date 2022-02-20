@@ -32,6 +32,7 @@ const OBTENER_USUARIO = gql`
       chatUserSecret
       isAuth
       vocation
+      universityInterestedIn
     }
   }
 `;

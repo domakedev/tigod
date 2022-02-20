@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import "./ProfileStudent.css";
 
 // Components
@@ -11,17 +11,23 @@ import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
 
 // Images
 import RegisterHeader from "../../../../assets/RegisterHeader.svg";
-import VoidImage from "../../../../assets/void.png";
 
 // Apollo
 import { useQuery, gql } from "@apollo/client";
+const { v4: uuid } = require("uuid");
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
-      id
       name
+      email
       role
       photo
+      isOnline
+      workPlaces
+      chatUsername
+      chatUserSecret
+      isAuth
+      vocation
     }
   }
 `;
@@ -29,6 +35,7 @@ const OBTENER_USUARIO = gql`
 const ProfileStudent = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const userAuth = useSelector((state) => state.authUser);
 
   const email = params.email;
   const { error, data } = useQuery(OBTENER_USUARIO, {
@@ -39,14 +46,6 @@ const ProfileStudent = () => {
   });
 
   const realUser = data?.obtenerUsuario;
-
-  const userVisited = {
-    image: VoidImage,
-    name: "---",
-    profession: "---",
-    careersInterested: "---",
-    universityInterestedIn: "---",
-  };
 
   if (error?.message === "No existe ese Usuario") {
     return (
@@ -93,11 +92,13 @@ const ProfileStudent = () => {
               <span>Estudiante</span>
             </div>
             <div className="profile-card-body-block-text">
-              <p>{userVisited?.careersInterested}</p>
+              <p>{realUser?.careersInterested}</p>
               <span>Preferencias profesionales</span>
             </div>
             <div className="profile-card-body-block-text">
-              <p>{userVisited?.universityInterestedIn}</p>
+              {userAuth?.universityInterestedIn.map((e) => (
+                <p key={uuid()}>- {e}</p>
+              ))}
               <span>Universidades de su interés</span>
             </div>
           </div>
