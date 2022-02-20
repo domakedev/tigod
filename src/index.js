@@ -39,6 +39,8 @@ render(
             <Route path="/registro" element={<Register />} />
             <Route path="/chat" element={<Chat />} />
 
+            <Route path="/miperfil/vacio/:email" element={<Register />} />
+
             <Route
               path="/miperfil/estudiante/:email"
               element={<ProfileStudent />}

@@ -5,8 +5,8 @@ import { CHAT_TO, AUTH_USER, MY_VOCATION } from "./types";
 
 const initialState = {
   chatTo: {},
-  authUser: {},
-  miVocacion: ""
+  authUser: null,
+  // miVocacion: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,7 +20,9 @@ const reducer = (state = initialState, action) => {
     case AUTH_USER:
       return { ...state, authUser: newValue };
     case MY_VOCATION:
-      return { ...state, miVocacion: newValue };
+      return { ...state, authUser: { ...state.authUser, vocation: newValue } };
+    // case MY_VOCATION:
+    //   return { ...state, miVocacion: newValue };
 
     default:
       return state;
