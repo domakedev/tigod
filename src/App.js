@@ -158,7 +158,7 @@ function App() {
           autenticarEsteUsuario();
           navigate("/registro");
         } catch (error) {
-          console.log("🚀 ~ file: App.js ~ line 87 ~ error", error);
+          // console.log("🚀 ~ file: App.js ~ line 87 ~ error", error);
         }
       };
       registrarEsteUsuario();
