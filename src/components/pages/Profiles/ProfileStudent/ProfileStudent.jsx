@@ -57,7 +57,6 @@ const ProfileStudent = () => {
   });
 
   const realUser = data?.obtenerUsuario;
-  console.log("🚀 ~ file: ProfileStudent.jsx ~ line 56 ~ realUser", realUser);
 
   const definirQualities = (string) => {
     switch (string) {

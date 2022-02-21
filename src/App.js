@@ -125,8 +125,6 @@ function App() {
             },
           });
 
-          console.log("aqui");
-
           // Registrar en CHAT ENGINE BACKEND
           let dataChatEngine = {
             username: user.email,
@@ -160,7 +158,7 @@ function App() {
           autenticarEsteUsuario();
           navigate("/registro");
         } catch (error) {
-          // console.log("🚀 ~ file: App.js ~ line 87 ~ error", error);
+          console.log("🚀 ~ file: App.js ~ line 161 ~ error", error)
         }
       };
       registrarEsteUsuario();
@@ -169,7 +167,6 @@ function App() {
     if (data !== undefined && isAuthenticated && user) {
       // Entra aqui si ya esta registrado y autenticado, pediremos el token
       // Y guardaremos el tokencitox
-      console.log("o aqui?");
       autenticarEsteUsuario();
       dispatch(actions.saveAuthUser(data.obtenerUsuario));
     }

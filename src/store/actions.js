@@ -46,7 +46,6 @@ const saveMyVocation = (vocation) => async (dispatch) => {
   }
 };
 const saveMyUnisInteres = (uniArr) => async (dispatch) => {
-  console.log("🚀 ~ file: actions.js ~ line 49 ~ uniArr", uniArr);
   try {
     // Guardar en la DB con Apollo
     dispatch(setUniInteres(uniArr));

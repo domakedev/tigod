@@ -87,11 +87,7 @@ const ProfileStudentConfig = () => {
         confirmButtonText: "Ok",
       });
 
-      // Actualizar Frontend
-      console.log(
-        "🚀 ~ file: ProfileStudentConfig.jsx ~ line 90 ~ configUser?.universityInterestedIn",
-        configUser?.universityInterestedIn
-      );
+      // Actualizar Frontend   
       dispatch(actions.saveMyUnisInteres(configUser?.universityInterestedIn));
     } catch (error) {
       console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);

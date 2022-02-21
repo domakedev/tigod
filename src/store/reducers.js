@@ -22,7 +22,6 @@ const reducer = (state = initialState, action) => {
     case MY_VOCATION:
       return { ...state, authUser: { ...state.authUser, vocation: newValue } };
     case MY_U_INTEREST:
-      console.log(newValue);
       return {
         ...state,
         authUser: { 
