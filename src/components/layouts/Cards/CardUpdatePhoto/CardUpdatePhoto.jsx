@@ -10,30 +10,42 @@ const CardUpdatePhoto = ({
   cargarNuevaFoto = () => {},
 }) => {
   const processFile = async (e) => {
-    var file = e.target.files[0];
-    var formdata = new FormData();
+    try {
+      var file = e.target.files[0];
+      var formdata = new FormData();
 
-    formdata.append("file", file);
-    formdata.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+      formdata.append("file", file);
+      formdata.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
 
-    formdata.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
+      formdata.append(
+        "upload_preset",
+        `${process.env.REACT_APP_UPLOAD_PRESET}`
+      );
 
-    console.log(
-      "🚀 ~ file: CardUpdatePhoto.jsx ~ line 22 ~ process.env.REACT_APP_ENDPOINT_CLOUDINARY",
-      process.env.REACT_APP_ENDPOINT_CLOUDINARY
-    );
+      console.log(
+        "🚀 ~ file: CardUpdatePhoto.jsx ~ line 20 ~ process.env.REACT_APP_UPLOAD_PRESET",
+        process.env.REACT_APP_UPLOAD_PRESET
+      );
 
-    let res = await fetch(`${process.env.REACT_APP_ENDPOINT_CLOUDINARY}`, {
-      method: "POST",
-      mode: "cors",
-      body: formdata,
-    });
+      console.log(
+        "🚀 ~ file: CardUpdatePhoto.jsx ~ line 22 ~ process.env.REACT_APP_ENDPOINT_CLOUDINARY",
+        process.env.REACT_APP_ENDPOINT_CLOUDINARY
+      );
 
-    let json = await res.json();
-    const url = JSON.stringify(json.secure_url);
-    const newUrl = url.slice(1, url.length - 1);
+      let res = await fetch(`${process.env.REACT_APP_ENDPOINT_CLOUDINARY}`, {
+        method: "POST",
+        mode: "cors",
+        body: formdata,
+      });
 
-    cargarNuevaFoto(newUrl);
+      let json = await res.json();
+      const url = JSON.stringify(json.secure_url);
+      const newUrl = url.slice(1, url.length - 1);
+
+      cargarNuevaFoto(newUrl);
+    } catch (error) {
+      console.log("🚀 ~ file: CardUpdatePhoto.jsx ~ line 47 ~ error", error);
+    }
   };
 
   return (
