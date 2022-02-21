@@ -17,9 +17,10 @@ const Header = () => {
       <Link to="/">
         <img className="header-logotipo" src={Logo} alt="Tigod" />
       </Link>
-      {authUser?.role !== "Estudiante" && !authUser ? null : (
+      {authUser?.role === "Estudiante" ? (
         <Link to="/mivocacion">Mi vocacion</Link>
-      )}
+      ) : null}
+      :
       <div className="header_buttons">
         <Menu right isOpen={false}>
           {authUser ? (
