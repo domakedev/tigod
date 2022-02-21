@@ -28,6 +28,8 @@ const OBTENER_USUARIO = gql`
       isOnline
       photo
       workPlaces
+      profession
+      actualWorkPlace
     }
   }
 `;
@@ -66,12 +68,7 @@ const ProfileProfessionalConfig = () => {
     }
   }, [data]);
 
-  const onChangeName = (e) => {
-    setConfigUser({
-      ...configUser,
-      [e.target.name]: e.target.value,
-    });
-  };
+ 
 
   const updateUser = async () => {
     try {
@@ -93,6 +90,26 @@ const ProfileProfessionalConfig = () => {
     } catch (error) {
       console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);
     }
+  };
+
+  const onChangeName = (e) => {
+    setConfigUser({
+      ...configUser,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onChangeProfesion = (e) => {
+    setConfigUser({
+      ...configUser,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onChangeActualWorkPlace = (e) => {
+    setConfigUser({
+      ...configUser,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const definirEstado = (estado) => {
@@ -154,14 +171,20 @@ const ProfileProfessionalConfig = () => {
             type="text"
             id="profesion"
             placeholder="Ingresa tu profesion"
+            name="profession"
+            value={configUser.profession}
+            onChange={(e) => onChangeProfesion(e)}
           />
-          <label className="config-card-label" htmlFor="actualwork">
+          <label className="config-card-label" htmlFor="actualWorkPlace">
             Lugar de trabajo actual
           </label>
           <input
             type="text"
-            id="actualwork"
-            placeholder="Ingresa tu lugar de trabajo actual"
+            id="actualWorkPlace"
+            placeholder="Lugar de trabajo actual"
+            name="actualWorkPlace"
+            value={configUser.actualWorkPlace}
+            onChange={(e) => onChangeActualWorkPlace(e)}
           />
         </div>
 

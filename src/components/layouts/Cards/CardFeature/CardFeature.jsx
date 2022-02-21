@@ -1,6 +1,6 @@
 import React from "react";
-import "./CardFeature.css";
 import VoidImage from "../../../../assets/void.png";
+import "./CardFeature.css";
 
 const CardFeature = ({
   title = "Titulo",

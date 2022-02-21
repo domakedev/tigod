@@ -32,6 +32,8 @@ const OBTENER_USUARIO = gql`
       chatUserSecret
       isAuth
       vocation
+      profession
+      actualWorkPlace
     }
   }
 `;
@@ -105,10 +107,10 @@ const ProfileProfessional = () => {
             </div>
             <div className="profile-card-body-block-text">
               <p>{realUser?.name}</p>
-              <span>{realUser?.role}</span>
+              <span>{realUser?.profession}</span>
             </div>
             <div className="profile-card-body-block-text">
-              <p>{userVisited?.actualWorkPlace}</p>
+              <p>{realUser?.actualWorkPlace}</p>
               <span>Lugar de trabajo actual</span>
             </div>
             <div className="profile-card-body-block-text">

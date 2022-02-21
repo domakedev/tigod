@@ -26,6 +26,8 @@ const OBTENER_USUARIO = gql`
       isOnline
       photo
       universityInterestedIn
+      goals
+      qualities
     }
   }
 `;
@@ -147,6 +149,62 @@ const ProfileStudentConfig = () => {
       });
     }
   };
+  const definirGoals = (e) => {
+    const name = e.target.name;
+    const status = e.target.checked;
+    // Si es true agregar
+    if (status === true) {
+      const nuevoConfigUser = { ...configUser };
+
+      if (!nuevoConfigUser.goals) {
+        nuevoConfigUser["goals"] = [];
+      }
+
+      const nuevoArr = [...nuevoConfigUser["goals"]];
+
+      nuevoArr.push(name);
+
+      setConfigUser({
+        ...configUser,
+        goals: nuevoArr,
+      });
+    } else if (status === false) {
+      const nuevoConfigUser = { ...configUser };
+      const quitado = nuevoConfigUser?.goals?.filter((g) => g !== name);
+      setConfigUser({
+        ...configUser,
+        goals: quitado,
+      });
+    }
+  };
+  const definirQualities = (e) => {
+    const name = e.target.name;
+    const status = e.target.checked;
+    // Si es true agregar
+    if (status === true) {
+      const nuevoConfigUser = { ...configUser };
+
+      if (!nuevoConfigUser.qualities) {
+        nuevoConfigUser["qualities"] = [];
+      }
+
+      const nuevoArr = [...nuevoConfigUser["qualities"]];
+
+      nuevoArr.push(name);
+
+      setConfigUser({
+        ...configUser,
+        qualities: nuevoArr,
+      });
+    } else if (status === false) {
+      const nuevoConfigUser = { ...configUser };
+      const quitado = nuevoConfigUser?.qualities?.filter((g) => g !== name);
+      setConfigUser({
+        ...configUser,
+        qualities: quitado,
+      });
+    }
+  };
 
   if (!data?.obtenerUsuario?.email) {
     return (
@@ -228,13 +286,41 @@ const ProfileStudentConfig = () => {
             Tus metas
           </p>
           <div className="config-card_universities">
-            <label htmlFor="m1">
-              <input type="checkbox" name="upao" id="m1" />
-              {""} ---
+            <label htmlFor="ser-un-lider">
+              <input
+                type="checkbox"
+                name="ser-un-lider"
+                id="ser-un-lider"
+                checked={configUser?.goals?.includes("ser-un-lider")}
+                onChange={(e) => {
+                  definirGoals(e);
+                }}
+              />
+              {""} Ser un lider
             </label>
-            <label htmlFor="m2">
-              <input type="checkbox" name="upao" id="m2" />
-              {""} ---
+            <label htmlFor="trabajo-gran-industria">
+              <input
+                type="checkbox"
+                name="trabajo-gran-industria"
+                id="trabajo-gran-industria"
+                checked={configUser?.goals?.includes("trabajo-gran-industria")}
+                onChange={(e) => {
+                  definirGoals(e);
+                }}
+              />
+              {""} Trabajar en una gran industria
+            </label>
+            <label htmlFor="salvar-planeta">
+              <input
+                type="checkbox"
+                name="salvar-planeta"
+                id="salvar-planeta"
+                checked={configUser?.goals?.includes("salvar-planeta")}
+                onChange={(e) => {
+                  definirGoals(e);
+                }}
+              />
+              {""} Salvar el planeta
             </label>
           </div>
         </div>
@@ -244,13 +330,41 @@ const ProfileStudentConfig = () => {
             Tus cualidades
           </p>
           <div className="config-card_universities">
-            <label htmlFor="c1">
-              <input type="checkbox" name="upao" id="c1" />
-              {""} ---
+            <label htmlFor="orador">
+              <input
+                type="checkbox"
+                name="orador"
+                id="orador"
+                checked={configUser?.qualities?.includes("orador")}
+                onChange={(e) => {
+                  definirQualities(e);
+                }}
+              />
+              {""} Orador
             </label>
-            <label htmlFor="c2">
-              <input type="checkbox" name="upao" id="c2" />
-              {""} ---
+            <label htmlFor="fisico">
+              <input
+                type="checkbox"
+                name="fisico"
+                id="fisico"
+                checked={configUser?.qualities?.includes("fisico")}
+                onChange={(e) => {
+                  definirQualities(e);
+                }}
+              />
+              {""} fisico
+            </label>
+            <label htmlFor="natural">
+              <input
+                type="checkbox"
+                name="natural"
+                id="natural"
+                checked={configUser?.qualities?.includes("natural")}
+                onChange={(e) => {
+                  definirQualities(e);
+                }}
+              />
+              {""} natural
             </label>
           </div>
         </div>

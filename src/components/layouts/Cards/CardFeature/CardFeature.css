@@ -1,5 +1,6 @@
 .feature-card {
   @apply w-[210px]
+  h-[230px]
       shadow-md
       py-[18px]
       px-[4px]
@@ -22,5 +23,6 @@
 }
 .feature-description {
   @apply px-2
-    text-center;
+    text-center
+    text-xs;
 }

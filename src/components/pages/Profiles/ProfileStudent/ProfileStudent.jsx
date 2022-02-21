@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import "./ProfileStudent.css";
 
 // Components
@@ -11,6 +10,16 @@ import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
 
 // Images
 import RegisterHeader from "../../../../assets/RegisterHeader.svg";
+
+// Images goals
+import IndustryImage from "../../../../assets/goals/industry.svg";
+import PlanetImage from "../../../../assets/goals/planet.svg";
+import LiderImage from "../../../../assets/goals/lider.svg";
+
+// Images qualities
+import MathImage from "../../../../assets/qualities/math.svg";
+import NaturalImage from "../../../../assets/qualities/natural.svg";
+import OradorImage from "../../../../assets/qualities/orador.svg";
 
 // Apollo
 import { useQuery, gql } from "@apollo/client";
@@ -28,6 +37,9 @@ const OBTENER_USUARIO = gql`
       chatUserSecret
       isAuth
       vocation
+      universityInterestedIn
+      goals
+      qualities
     }
   }
 `;
@@ -35,7 +47,6 @@ const OBTENER_USUARIO = gql`
 const ProfileStudent = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const userAuth = useSelector((state) => state.authUser);
 
   const email = params.email;
   const { error, data } = useQuery(OBTENER_USUARIO, {
@@ -46,6 +57,76 @@ const ProfileStudent = () => {
   });
 
   const realUser = data?.obtenerUsuario;
+  console.log("🚀 ~ file: ProfileStudent.jsx ~ line 56 ~ realUser", realUser);
+
+  const definirQualities = (string) => {
+    switch (string) {
+      case "orador":
+        return (
+          <CardFeature
+            key={uuid()}
+            title="Orador"
+            image={OradorImage}
+            description="Facilidad para hablar en público"
+          ></CardFeature>
+        );
+      case "fisico":
+        return (
+          <CardFeature
+            key={uuid()}
+            title="Fisico"
+            image={MathImage}
+            description="Le son faciles los problemas de fisica"
+          ></CardFeature>
+        );
+      case "natural":
+        return (
+          <CardFeature
+            key={uuid()}
+            title="Natural"
+            image={NaturalImage}
+            description="Ama y sabe como tratar a los animales"
+          ></CardFeature>
+        );
+
+      default:
+        break;
+    }
+  };
+  const definirGoal = (string) => {
+    switch (string) {
+      case "trabajo-gran-industria":
+        return (
+          <CardFeature
+            key={uuid()}
+            title="Una gran industria"
+            image={IndustryImage}
+            description="Quiere trabajar en una gran compañia industrial"
+          ></CardFeature>
+        );
+      case "ser-un-lider":
+        return (
+          <CardFeature
+            key={uuid()}
+            title="Ser un LIDER"
+            image={LiderImage}
+            description="Quiere dirigir un gran equipo"
+          ></CardFeature>
+        );
+      case "salvar-planeta":
+        return (
+          <CardFeature
+            key={uuid()}
+            title="Salvar el planeta"
+            image={PlanetImage}
+            description="Quiere salvar su entorno y a las especies en peligro"
+          ></CardFeature>
+        );
+
+      default:
+        break;
+    }
+  };
 
   if (error?.message === "No existe ese Usuario") {
     return (
@@ -96,7 +177,7 @@ const ProfileStudent = () => {
               <span>Preferencias profesionales</span>
             </div>
             <div className="profile-card-body-block-text">
-              {userAuth?.universityInterestedIn.map((e) => (
+              {realUser?.universityInterestedIn.map((e) => (
                 <p key={uuid()}>- {e}</p>
               ))}
               <span>Universidades de su interés</span>
@@ -107,17 +188,13 @@ const ProfileStudent = () => {
           <div className="student-qualities">
             <p className="student-qualities-title">Mejores cualidades</p>
             <div className="student-qualities-cards">
-              <CardFeature />
-              <CardFeature />
-              <CardFeature />
+              {realUser?.qualities?.map((e) => definirQualities(e))}
             </div>
           </div>
           <div className="student-goals">
             <p className="student-qualities-title">Metas</p>
             <div className="student-qualities-cards">
-              <CardFeature />
-              <CardFeature />
-              <CardFeature />
+              {realUser?.goals?.map((e) => definirGoal(e))}
             </div>
           </div>
         </div>

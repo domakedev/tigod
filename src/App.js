@@ -33,6 +33,7 @@ const OBTENER_USUARIO = gql`
       isAuth
       vocation
       universityInterestedIn
+      goals
     }
   }
 `;
