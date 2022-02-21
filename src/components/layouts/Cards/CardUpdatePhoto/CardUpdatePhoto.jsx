@@ -24,7 +24,7 @@ const CardUpdatePhoto = ({
     );
 
     let res = await fetch(`${process.env.REACT_APP_ENDPOINT_CLOUDINARY}`, {
-      method: "post",
+      method: "POST",
       mode: "cors",
       body: formdata,
     });
