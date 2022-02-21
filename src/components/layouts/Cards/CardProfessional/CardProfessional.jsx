@@ -6,6 +6,7 @@ import "./CardProfessional.css";
 import VoidImagen from "../../../../assets/void.png";
 import BagIcon from "../../../../assets/icons/bag.svg";
 import ProfileIcon from "../../../../assets/icons/profile.svg";
+import PointerImage from "../../../../assets/icons/pointer.svg";
 // import ChatIcon from "../../../../assets/icons/chat.svg";
 
 const CardProfessional = ({
@@ -25,7 +26,7 @@ const CardProfessional = ({
           {profession}
         </p>
         <p className="profesional-place">
-          <img src={BagIcon} alt="Profesión" />
+          <img src={PointerImage} alt="Profesión" />
           {place}
         </p>
         <div className="professional-buttons">

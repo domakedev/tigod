@@ -218,7 +218,9 @@ const ProfileStudentConfig = () => {
     <div className="page-container">
       <Header />
       <div className="main-content config-main-content">
+
         <CardConnection fun={definirEstado} status={configUser.isOnline} />
+        
         <div className="config-card">
           <p className="config-card-title">Tu nombre</p>
           <label htmlFor="name"></label>
@@ -231,6 +233,7 @@ const ProfileStudentConfig = () => {
             onChange={(e) => onChangeName(e)}
           />
         </div>
+
         <CardUpdatePhoto
           prevImage={data?.obtenerUsuario?.photo}
           newImage={configUser?.photo}
@@ -285,7 +288,7 @@ const ProfileStudentConfig = () => {
           <p className="config-card-title config-card-title_universities">
             Tus metas
           </p>
-          <div className="config-card_universities">
+          <div className="config-card_goals">
             <label htmlFor="ser-un-lider">
               <input
                 type="checkbox"
@@ -368,6 +371,7 @@ const ProfileStudentConfig = () => {
             </label>
           </div>
         </div>
+
         <Button text="Actualizar" type="success" fun={updateUser} />
       </div>
       <Footer />

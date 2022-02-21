@@ -12,12 +12,14 @@ const Header = () => {
   const authUser = useSelector((state) => state.authUser);
   const { loginWithRedirect, logout } = useAuth0();
 
-
   return (
     <div className="header">
       <Link to="/">
         <img className="header-logotipo" src={Logo} alt="Tigod" />
       </Link>
+      {authUser?.role !== "Estudiante" && !authUser ? null : (
+        <Link to="/mivocacion">Mi vocacion</Link>
+      )}
       <div className="header_buttons">
         <Menu right isOpen={false}>
           {authUser ? (

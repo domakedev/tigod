@@ -29,3 +29,9 @@
     justify-start
     gap-3;
 }
+
+.config-card_goals {
+  @apply flex
+  flex-wrap
+  gap-2;
+}

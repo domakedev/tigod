@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import "./MiVocacion.css";
 
@@ -27,6 +28,8 @@ const OBTENER_USUARIOS = gql`
       email
       role
       photo
+      profession
+      actualWorkPlace
     }
   }
 `;
@@ -89,7 +92,10 @@ const MiVocacion = () => {
   if (!miVocacion) {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
-        <CardAnuncio title="Aun no sabemos tu vocación" description=" ">
+        <CardAnuncio
+          title="Aun no sabemos tu vocación"
+          description="Debes ser estudiante"
+        >
           <Button
             type="principal"
             text="Has el test primero"
@@ -122,7 +128,15 @@ const MiVocacion = () => {
                 title={c.title}
                 image={c.image}
                 description={c.description}
-                fun={c.goTo}
+                fun={() => {
+                  Swal.fire({
+                    title:
+                      "Pronto podras ver las carreras mas importantes de tu país.",
+                    // text: "Selecciona tu perfil por esta sesión",
+                    icon: "info",
+                    confirmButtonText: "Ok",
+                  });
+                }}
               />
             ))}
           </div>
@@ -139,9 +153,9 @@ const MiVocacion = () => {
                 key={uuid()}
                 image={e?.photo}
                 name={e?.name}
-                profession={e?.role}
-                place={e?.email}
-                email={e?.email}
+                profession={e?.profession}
+                place={e?.actualWorkPlace}
+                email={e?.actualWorkPlace}
               />
             ))}
           </div>

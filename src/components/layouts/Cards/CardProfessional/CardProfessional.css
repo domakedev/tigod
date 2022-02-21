@@ -55,7 +55,8 @@
 }
 .professional-button {
   @apply w-10
-    h-10;
+    h-10
+    cursor-pointer;
 }
 
 .profesional-place {

@@ -20,17 +20,8 @@ const CardUpdatePhoto = ({
       formdata.append(
         "upload_preset",
         `${process.env.REACT_APP_UPLOAD_PRESET}`
-      );
+      );    
 
-      console.log(
-        "🚀 ~ file: CardUpdatePhoto.jsx ~ line 20 ~ process.env.REACT_APP_UPLOAD_PRESET",
-        process.env.REACT_APP_UPLOAD_PRESET
-      );
-
-      console.log(
-        "🚀 ~ file: CardUpdatePhoto.jsx ~ line 22 ~ process.env.REACT_APP_ENDPOINT_CLOUDINARY",
-        process.env.REACT_APP_ENDPOINT_CLOUDINARY
-      );
 
       let res = await fetch(`${process.env.REACT_APP_ENDPOINT_CLOUDINARY}`, {
         method: "POST",
