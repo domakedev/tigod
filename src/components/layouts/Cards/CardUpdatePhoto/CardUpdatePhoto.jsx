@@ -18,7 +18,12 @@ const CardUpdatePhoto = ({
 
     formdata.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
-    let res = await fetch(process.env.REACT_APP_ENDPOINT_CLOUDINARY, {
+    console.log(
+      "🚀 ~ file: CardUpdatePhoto.jsx ~ line 22 ~ process.env.REACT_APP_ENDPOINT_CLOUDINARY",
+      process.env.REACT_APP_ENDPOINT_CLOUDINARY
+    );
+
+    let res = await fetch(`${process.env.REACT_APP_ENDPOINT_CLOUDINARY}`, {
       method: "post",
       mode: "cors",
       body: formdata,
