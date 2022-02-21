@@ -19,8 +19,7 @@ const Header = () => {
       </Link>
       {authUser?.role === "Estudiante" ? (
         <Link to="/mivocacion">Mi vocacion</Link>
-      ) : null}
-      :
+      ) : null}      
       <div className="header_buttons">
         <Menu right isOpen={false}>
           {authUser ? (
