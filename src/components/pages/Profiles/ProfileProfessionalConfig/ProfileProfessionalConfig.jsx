@@ -18,6 +18,8 @@ import CardAnuncio from "../../../layouts/Cards/CardAnuncio/CardAnuncio";
 
 // Apollo
 import { useMutation, useQuery, gql } from "@apollo/client";
+const { v4: uuid } = require("uuid");
+
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
@@ -30,6 +32,12 @@ const OBTENER_USUARIO = gql`
       workPlaces
       profession
       actualWorkPlace
+      experiences {
+        cargo
+        empresa
+        inicio
+        fin
+      }
     }
   }
 `;
@@ -52,6 +60,9 @@ const ProfileProfessionalConfig = () => {
     isOnline: false,
     photo: "",
     workPlaces: [{}],
+    profession: "",
+    actualWorkPlace: "",
+    experiences: [],
   });
 
   const email = user?.email;
@@ -67,8 +78,6 @@ const ProfileProfessionalConfig = () => {
       setConfigUser(data.obtenerUsuario);
     }
   }, [data]);
-
- 
 
   const updateUser = async () => {
     try {
@@ -130,6 +139,37 @@ const ProfileProfessionalConfig = () => {
     setConfigUser({
       ...configUser,
       workPlaces: ciudades,
+    });
+  };
+
+  const addExperience = (experience) => {
+    const tempExperiences = [...configUser.experiences];
+
+    // Añadir experiencia
+    tempExperiences.push(experience);
+
+    setConfigUser({
+      ...configUser,
+      experiences: tempExperiences,
+    });
+  };
+
+  const deleteExperience = (experience) => {
+    const tempExperiences = [...configUser.experiences];
+
+    // Filtrado
+    const filtrado = tempExperiences.filter(
+      (e) =>
+        e.cargo !== experience.cargo &&
+        e.empresa !== experience.empresa &&
+        e.inicio !== experience.inicio &&
+        e.fin !== experience.fin
+    );
+    // Borrar experiencia
+
+    setConfigUser({
+      ...configUser,
+      experiences: filtrado,
     });
   };
 
@@ -198,7 +238,19 @@ const ProfileProfessionalConfig = () => {
           workPlaces={data?.obtenerUsuario?.workPlaces}
         />
 
-        <CardOneWorkExperience />
+        {configUser?.experiences?.map((experience) => (
+          <CardOneWorkExperience
+            key={uuid()}
+            cargo={experience.cargo}
+            empresa={experience.empresa}
+            inicio={experience.inicio}
+            fin={experience.fin}
+            eliminarOption={true}
+            fun={deleteExperience}
+          />
+        ))}
+
+        <CardOneWorkExperience fun={addExperience} />
 
         <Button text="Actualizar" type="success" fun={updateUser} />
       </div>

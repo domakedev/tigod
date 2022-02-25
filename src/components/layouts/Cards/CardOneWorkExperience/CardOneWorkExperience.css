@@ -1,0 +1,5 @@
+.card-exp-centrar-btn {
+  @apply w-full
+  flex
+  justify-center;
+}

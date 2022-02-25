@@ -27,7 +27,7 @@
   @apply text-sm
         font-normal
         text-principal
-        w-2/3
+        w-2/3;
 }
 .profile-card-header-img {
   @apply absolute
@@ -121,7 +121,8 @@
   @apply w-[40px]
     h-[40px]
     object-cover
-    object-center;
+    object-center
+    cursor-pointer;
 }
 
 .profile-card-experience {

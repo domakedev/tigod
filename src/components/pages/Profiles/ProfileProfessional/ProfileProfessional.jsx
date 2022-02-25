@@ -19,6 +19,7 @@ import Footer from "../../../layouts/Footer/Footer";
 // Apollo
 import { useQuery, gql } from "@apollo/client";
 import CardMap from "../../../layouts/Cards/CardMap/CardMap";
+const { v4: uuid } = require("uuid");
 const OBTENER_USUARIO = gql`
   query obtenerUsuario($email: String!) {
     obtenerUsuario(email: $email) {
@@ -34,6 +35,12 @@ const OBTENER_USUARIO = gql`
       vocation
       profession
       actualWorkPlace
+      experiences {
+        cargo
+        empresa
+        inicio
+        fin
+      }
     }
   }
 `;
@@ -66,10 +73,6 @@ const ProfileProfessional = () => {
     numberOfWorks: "---",
     citiesOfWork: "---",
   };
-
-  if (realUser?.role !== "Profesional") {
-    navigate("/");
-  }
 
   return (
     <div className="page-container">
@@ -149,22 +152,24 @@ const ProfileProfessional = () => {
         <div className="profile-card-experience">
           <p className="profile-card-experience-title">Experiencia</p>
           <div className="profile-card-experiences">
-            <div className="professional-experience">
-              <img
-                src={ChatIcon}
-                alt=""
-                className="professional-experience-icon"
-              />
-              <div className="professional-experience-texts">
-                <p className="experience-texts-occupation">Puesto</p>
-                <p className="experience-texts-company">Empresa</p>
-                <div className="experience-texts-times">
-                  <p className="experience-texts-times">2011</p>
-                  <span>-</span>
-                  <p className="experience-texts-times">2018</p>
+            {realUser?.experiences?.map((e) => (
+              <div className="professional-experience" key={uuid()}>
+                <img
+                  src={ChatIcon}
+                  alt=""
+                  className="professional-experience-icon"
+                />
+                <div className="professional-experience-texts">
+                  <p className="experience-texts-occupation">{e.cargo}</p>
+                  <p className="experience-texts-company">{e.empresa}</p>
+                  <div className="experience-texts-times">
+                    <p className="experience-texts-times">{e.inicio}</p>
+                    <span>-</span>
+                    <p className="experience-texts-times">{e.fin}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
 

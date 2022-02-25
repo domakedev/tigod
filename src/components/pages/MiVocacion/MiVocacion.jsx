@@ -155,7 +155,7 @@ const MiVocacion = () => {
                 name={e?.name}
                 profession={e?.profession}
                 place={e?.actualWorkPlace}
-                email={e?.actualWorkPlace}
+                email={e?.email}
               />
             ))}
           </div>

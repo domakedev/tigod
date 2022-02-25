@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./CardWorkedCities.css";
 
 const CardWorkedCities = ({ updateWorkPlaces, workPlaces }) => {
- 
   const [ciudades, setCiudades] = useState({
     tacna: workPlaces?.includes("tacna"),
     cuzco: workPlaces?.includes("cuzco"),
@@ -11,7 +10,6 @@ const CardWorkedCities = ({ updateWorkPlaces, workPlaces }) => {
     iquitos: workPlaces?.includes("iquitos"),
     piura: workPlaces?.includes("piura"),
   });
-
 
   const onChangeHandler = (e) => {
     const ciudad = e.target.name;
@@ -38,7 +36,7 @@ const CardWorkedCities = ({ updateWorkPlaces, workPlaces }) => {
     const reFiltered = filtered.map((e) => e[0]);
 
     updateWorkPlaces(reFiltered);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ciudades]);
 
   return (
