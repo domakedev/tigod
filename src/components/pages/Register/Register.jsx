@@ -95,7 +95,7 @@ const Register = () => {
         navigate(`/miperfil/profesional/${userAuth?.email}`);
       }
     } catch (error) {
-      console.log("🚀 ~ file: Register.jsx ~ line 43 ~ error", error);
+      console.log("🚀 ~ file: Register.jsx ~ line 98 ~ error", error);
     }
   };
 

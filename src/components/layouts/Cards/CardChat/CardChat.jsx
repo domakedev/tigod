@@ -34,8 +34,8 @@ const CardChat = () => {
           ></Button>
         ) : (
           <Button
-            text="Ve al perfil de tu profesional indicado"
-            type="principal"
+            text="Chat premium DESACTIVADO, solo disponible con suscripción de pago"
+            type="alert"
           ></Button>
         )}
       </div>
